@@ -1,0 +1,13 @@
+daca o comanda este mai mare, aceasta poate fi livrata in mai multe colete
+
+daca un loc de munca, atunci angajatii ce corespund acelui loc de munca, vor ramane mometan fara un loc de munca atribiuit, in loc sa fie stersi din tabel => set null
+
+daca o piesa sau un model de masina este sters, atunci si legatura dintre piesa si model trebuie sa dispara => cascade
+
+o comanda trebuie plasata obligatoriu de un client (daca un client este sters, atunci si comenzile acestuia sunt sterse)
+
+o comanda nu trebuie sa aiba obligatoriu o masina care sa ii corespunda (daca o masina este stearsa din baza de date, iar pentru aceasta masina au fost date comenziu, comenzile nu vor fi sterse)
+
+o comanda trebuie sa fie pragatita obligatoriu de un angajat ( daca un angajat este sters, atunci si comenzile pe care le pregateste acesta trebuie sterse)
+
+daca o adresa este stearsa, atunci o livrare care trebuie facuta la acea adresa, nu va fi stearsa, curierul pentru a o putea livra va trebui sa sune direct clientul pentru a afla adresa unde trebuie dus coletul

@@ -1,0 +1,118 @@
+CREATE TABLE `magazin_piese_auto`.`locuri_munca` (
+  `id_loc_munca` INT NOT NULL AUTO_INCREMENT,
+  `denumire` VARCHAR(255) NOT NULL,
+  `salariu_min` INT UNSIGNED NOT NULL,
+  `salariu_max` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_loc_munca`));
+
+CREATE TABLE `magazin_piese_auto`.`angajati` (
+  `id_angajati` INT NOT NULL AUTO_INCREMENT,
+  `nume_familie` VARCHAR(25) NOT NULL,
+  `prenume` VARCHAR(25) NOT NULL,
+  `salariu` INT UNSIGNED NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `data_angajare` DATE NOT NULL,
+  `data_nasterii` DATE NOT NULL,
+  `loc_munca` INT NULL,
+  PRIMARY KEY (`id_angajati`),
+  INDEX `loc_munca_idx` (`loc_munca` ASC) VISIBLE,
+  CONSTRAINT `loc_munca`
+    FOREIGN KEY (`loc_munca`)
+    REFERENCES `magazin_piese_auto`.`locuri_munca` (`id_loc_munca`)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL);
+
+CREATE TABLE `magazin_piese_auto`.`clienti` (
+  `cnp` VARCHAR(13) NOT NULL,
+  `nume_familie` VARCHAR(25) NOT NULL,
+  `prenume` VARCHAR(25) NOT NULL,
+  `nr_telefon` VARCHAR(12) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `data_primei_comenzi` DATE NULL,
+  PRIMARY KEY (`cnp`));
+
+CREATE TABLE `magazin_piese_auto`.`adrese` (
+  `id_adresa` INT NOT NULL,
+  `tara` VARCHAR(45) NOT NULL,
+  `judet` VARCHAR(45) NOT NULL,
+  `localitate` VARCHAR(45) NOT NULL,
+  `strada` VARCHAR(45) NOT NULL,
+  `nr_strada` INT NOT NULL,
+  `nr_bloc` INT NULL,
+  `scara` VARCHAR(10) NULL,
+  `etaj` INT NULL,
+  `apartament` INT NULL,
+  PRIMARY KEY (`id_adresa`));
+
+CREATE TABLE `magazin_piese_auto`.`masini` (
+  `vin` VARCHAR(17) NOT NULL,
+  `nr_inmatriculare` VARCHAR(10) NOT NULL,
+  `an_fabricatie` YEAR(4) NOT NULL,
+  `kilometraj` VARCHAR(10) NULL,
+  PRIMARY KEY (`vin`));
+
+CREATE TABLE `magazin_piese_auto`.`modele_masini` (
+  `id_model` INT NOT NULL AUTO_INCREMENT,
+  `marca` VARCHAR(15) NOT NULL,
+  `model` VARCHAR(15) NOT NULL,
+  `an_incepere_productie` YEAR(4) NOT NULL,
+  `an_finalizare_productie` YEAR(4) NOT NULL,
+  `motorizare_cc` INT NULL,
+  `putere_cp` INT NOT NULL,
+  `combustibil` ENUM('benzina', 'motorina', 'hibrid', 'electric') NOT NULL,
+  `cod_motor` VARCHAR(10) NULL,
+  `tip_tractiune` ENUM('fata', 'spate', '4x4') NOT NULL,
+  PRIMARY KEY (`id_model`));
+
+CREATE TABLE `magazin_piese_auto`.`piese` (
+  `id_piesa` INT NOT NULL AUTO_INCREMENT,
+  `denumire_piesa` VARCHAR(45) NOT NULL,
+  `producator` VARCHAR(45) NOT NULL,
+  `interval_recomandat_schimb` VARCHAR(45) NULL,
+  `data_fabricatie` DATE NOT NULL,
+  `pret_ron` INT NOT NULL,
+  PRIMARY KEY (`id_piesa`));
+
+CREATE TABLE `magazin_piese_auto`.`piesa_model` (
+  `id_piesa` INT NOT NULL,
+  `id_model` INT NOT NULL,
+  PRIMARY KEY (`id_piesa`, `id_model`),
+  INDEX `id_model_idx` (`id_model` ASC) VISIBLE,
+  CONSTRAINT `id_piesa`
+    FOREIGN KEY (`id_piesa`)
+    REFERENCES `magazin_piese_auto`.`piese` (`id_piesa`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `id_model`
+    FOREIGN KEY (`id_model`)
+    REFERENCES `magazin_piese_auto`.`modele_masini` (`id_model`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+
+CREATE TABLE `magazin_piese_auto`.`comenzi` (
+  `id_comanda` INT NOT NULL,
+  `data_comanda` DATE NOT NULL,
+  `masina` VARCHAR(17) NULL,
+  `cnp_client` VARCHAR(13) NOT NULL,
+  `pregatita_de_angajat` INT NOT NULL,
+  `tip_livrare` ENUM('ridicare personala', 'livare') NOT NULL,
+  `status_comanda` ENUM('plasata', 'pregatita pentru ridicare', 'in curs de livrare', 'ridicata') NOT NULL,
+  PRIMARY KEY (`id_comanda`),
+  INDEX `masina_idx` (`masina` ASC) VISIBLE,
+  INDEX `cnp_client_idx` (`cnp_client` ASC) VISIBLE,
+  INDEX `pregatita_de_angajat_idx` (`pregatita_de_angajat` ASC) VISIBLE,
+  CONSTRAINT `masina`
+    FOREIGN KEY (`masina`)
+    REFERENCES `magazin_piese_auto`.`masini` (`vin`)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL,
+  CONSTRAINT `cnp_client`
+    FOREIGN KEY (`cnp_client`)
+    REFERENCES `magazin_piese_auto`.`clienti` (`cnp`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `pregatita_de_angajat`
+    FOREIGN KEY (`pregatita_de_angajat`)
+    REFERENCES `magazin_piese_auto`.`angajati` (`id_angajati`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT);
