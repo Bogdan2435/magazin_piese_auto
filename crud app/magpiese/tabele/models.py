@@ -1,3 +1,4 @@
+from statistics import mode
 from tabnanny import verbose
 from django.db import models
 
@@ -13,4 +14,20 @@ class LocuriMunca(models.Model):
         verbose_name_plural = 'Locuri munca'
         
     def __str__(self):
-        return self.name
+        return self.denumire
+
+class Angajati(models.Model):
+    nume_familie = models.CharField(max_length=255)
+    prenume = models.CharField(max_length=255)
+    salariu = models.IntegerField()
+    email = models.CharField(max_length=255)
+    data_angajare = models.DateField()
+    data_nasterii = models.DateField()
+    loc_munca = models.ForeignKey(LocuriMunca, on_delete = models.PROTECT)
+
+    class Meta:
+        verbose_name = 'Angajat'
+        verbose_name_plural = 'Angajati'
+
+    def __str__(self):
+        return '%s %s' % (self.nume_familie, self.prenume)

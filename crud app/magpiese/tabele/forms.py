@@ -7,3 +7,8 @@ class LocMuncaForm(forms.ModelForm):
     class Meta:
         model = LocuriMunca
         fields = "__all__"
+
+class AngajatiForm(forms.ModelForm):
+    class Meta:
+        model = Angajati
+        fields = "__all__"
