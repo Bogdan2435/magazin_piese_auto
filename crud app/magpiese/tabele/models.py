@@ -31,3 +31,23 @@ class Angajati(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.nume_familie, self.prenume)
+
+class Adrese(models.Model):
+    tara = models.CharField(max_length=255)
+    judet = models.CharField(max_length=255)
+    localitate = models.CharField(max_length=255)
+    strada = models.CharField(max_length=255)
+    nr_strada = models.IntegerField()
+    nr_bloc = models.IntegerField()
+    scara = models.CharField(max_length=255)
+    etaj = models.IntegerField()
+    apartament = models.IntegerField()
+
+    class Meta:
+        verbose_name = 'Adresa'
+        verbose_name_plural = 'Adrese'
+
+    def __str__(self):
+        return 'strada %s din localitatea %s judetul %s' % (self.strada, self.localitate, self.judet)
+
+
