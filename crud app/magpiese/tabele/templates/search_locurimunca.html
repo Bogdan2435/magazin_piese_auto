@@ -21,6 +21,7 @@
     <table align="center" style="margin: 0px auto;">
         <thead>
             <tr>
+                <th>ID Loc Munca</th>
                 <th>Denumire Loc Munca</th>
                 <th>salariu_min</th>
                 <th>salariu_max</th>
@@ -31,6 +32,7 @@
         <tbody>
             {% for locMunca in locuriMunca %}
             <tr>
+                <td>{{locMunca.id}}</td>
                 <td>{{locMunca.denumire}}</td>
                 <td>{{locMunca.salariu_min}}</td>
                 <td>{{locMunca.salariu_max}}</td>
@@ -44,6 +46,7 @@
             {% endfor %}
         </tbody>
     </table>
+    <center><a href="{% url 'create_locmunca' %}">Adauga un loc de munca.</a></center>
 </body>
 
 </html>
