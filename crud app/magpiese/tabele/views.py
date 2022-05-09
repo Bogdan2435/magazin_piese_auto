@@ -33,3 +33,8 @@ def create_Angajat(request):
     else:
         form = AngajatiForm()
     return render(request, 'create_angajati.html', {'form':form}) 
+
+def read_LocuriMunca(request):
+    locuriMunca = LocuriMunca.objects.all()
+    return render(request, 'search_locurimunca.html', {'locuriMunca':locuriMunca})
+
