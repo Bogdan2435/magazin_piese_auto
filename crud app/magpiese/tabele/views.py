@@ -38,3 +38,19 @@ def read_LocuriMunca(request):
     locuriMunca = LocuriMunca.objects.all()
     return render(request, 'search_locurimunca.html', {'locuriMunca':locuriMunca})
 
+def update_LocuriMunca(request, pk):
+    locMunca = LocuriMunca.objects.get(id=pk)
+    form = LocMuncaForm(instance=locMunca)
+
+    if request.method == 'POST':
+        form = LocMuncaForm(request.POST, instance=locMunca)
+        if form.is_valid():
+            form.save()
+            return redirect('/search/locurimunca')
+
+    context = {
+        'locMunca':locMunca,
+        'form':form,
+    }
+    return render(request, 'update_locurimunca.html', context)
+
