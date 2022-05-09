@@ -49,8 +49,21 @@ def update_LocuriMunca(request, pk):
             return redirect('/search/locurimunca')
 
     context = {
-        'locMunca':locMunca,
-        'form':form,
+        'locMunca': locMunca,
+        'form': form,
     }
     return render(request, 'update_locurimunca.html', context)
+
+def delete_LocuriMunca(request, pk):
+    locMunca = LocuriMunca.objects.get(id=pk)
+
+    if request.method == 'POST':
+        locMunca.delete()
+        return redirect('/search/locurimunca')
+
+    context = {
+        'locMunca': locMunca,
+    }
+    return render(request, 'delete_locurimunca.html', context)
+
 
