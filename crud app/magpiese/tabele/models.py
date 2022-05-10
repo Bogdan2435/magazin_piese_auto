@@ -32,6 +32,8 @@ class Angajati(models.Model):
     def __str__(self):
         return '%s %s' % (self.nume_familie, self.prenume)
 
+        
+
 class Adrese(models.Model):
     tara = models.CharField(max_length=255)
     judet = models.CharField(max_length=255)
