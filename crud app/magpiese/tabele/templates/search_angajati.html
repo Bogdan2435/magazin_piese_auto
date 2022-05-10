@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Angajati</title>
+</head>
+<style>
+    table,
+    th,
+    td 
+    {
+        border: 2px solid;
+    }
+</style>
+
+<body>
+    <h2 style="text-align:center"> Blog Informationn </h2>
+    <table align="center" style="margin: 0px auto;">
+        <thead>
+            <tr>
+                <th>ID Angajat</th>
+                <th>Nume</th>
+                <th>Salariu</th>
+                <th>Email</th>
+                <th>Data angajarii</th>
+                <th>Data nasterii</th>
+                <th>Functie</th>
+                <th>Edit</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for angajat in angajati %}
+            <tr>
+                <td>{{angajat.id}}</td>
+                <td>{{angajat.nume_familie}} {{angajat.prenume}}</td>
+                <td>{{angajat.salariu}}</td>
+                <td>{{angajat.email}}</td>
+                <td>{{angajat.data_angajare}}</td>
+                <td>{{angajat.data_nasterii}}</td>
+                {% for locMunca in locuriMunca %}
+                {% if locMunca.id == angajat.loc_munca_id %}
+                <td>{{locMunca.denumire}}</td>
+                {% endif %}
+                {% endfor %}
+                <td>
+                    <a href="/update/angajati/{{angajat.pk}}">Update</a>    
+                </td>
+                <td>
+                    <a href="/delete/angajati/{{angajat.pk}}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <center><a href="{% url 'create_angajat' %}">Adauga un angajat.</a></center>
+</body>
+
+</html>

@@ -42,6 +42,15 @@ def search(request):
     context = {}
     return render(request, 'search.html', context)
 
+def read_Angajati(request):
+    angajati = Angajati.objects.all()
+    locuriMunca = LocuriMunca.objects.all()
+    context = {
+        'angajati': angajati,
+        'locuriMunca': locuriMunca,
+    }
+    return render(request, 'search_angajati.html', context)
+
 def read_LocuriMunca(request):
     locuriMunca = LocuriMunca.objects.all()
     return render(request, 'search_locurimunca.html', {'locuriMunca':locuriMunca})
@@ -62,6 +71,22 @@ def update_LocuriMunca(request, pk):
     }
     return render(request, 'update_locurimunca.html', context)
 
+def update_Angajati(request, pk):
+    angajat = Angajati.objects.get(id=pk)
+    form = AngajatiForm(instance=angajat)
+
+    if request.method == 'POST':
+        form = AngajatiForm(request.POST, instance=angajat)
+        if form.is_valid():
+            form.save()
+            return redirect('/search/angajati')
+
+    context = {
+        'angajat': angajat,
+        'form': form,
+    }
+    return render(request, 'update_angajati.html', context)
+
 def delete_LocuriMunca(request, pk):
     locMunca = LocuriMunca.objects.get(id=pk)
 
@@ -73,5 +98,17 @@ def delete_LocuriMunca(request, pk):
         'locMunca': locMunca,
     }
     return render(request, 'delete_locurimunca.html', context)
+
+def delete_Angajati(request, pk):
+    angajat = Angajati.objects.get(id=pk)
+
+    if request.method == 'POST':
+        angajat.delete()
+        return redirect('/search/angajati')
+
+    context = {
+        'angajat': angajat,
+    }
+    return render(request, 'delete_angajati.html', context)
 
 
