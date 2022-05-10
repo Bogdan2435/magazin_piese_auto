@@ -39,9 +39,45 @@ class Clienti(models.Model):
     nr_telefon = models.CharField(max_length=12)
     email = models.CharField(max_length=255)
 
-# class Modele_Masini(models.Model):
-#     marca = models.CharField(max_length=255)
-#     model = models.CharField(max_length=255)
+class Modele_Masini(models.Model):
+    marca = models.CharField(max_length=255)
+    model = models.CharField(max_length=255)
+    an_incepere_productie = models.PositiveSmallIntegerField()
+    an_finalizare_productie = models.PositiveSmallIntegerField()
+    motorizare_cc = models.IntegerField(null=True)
+    putere_cp = models.IntegerField()
+
+    MOTORIZARI = (
+        ('benzina', 'benzina'),
+        ('diesel', 'diesel'),
+        ('hybrid-benzina', 'hybrid-benzina'),
+        ('hybrid-diesel', 'hybrid-diesel'),
+        ('electric', 'electric'),
+        ('hidrogen', 'hidrogen'),
+    )
+
+    combustibil = models.CharField(
+        max_length = 20,
+        choices = MOTORIZARI,
+        default = 'benzina',
+        help_text = 'Alegeti combustibilul masinii',
+    )
+
+    cod_motor = models.CharField(max_length=255)
+
+    SISTEM_TRACTIUNE = (
+        ('fata', 'fata'),
+        ('spate', 'spate'),
+        ('4x4', '4x4')
+    )
+
+    tip_tractiune = models.CharField(
+        max_length = 20,
+        choices = SISTEM_TRACTIUNE,
+        default = 'fata',
+        help_text = 'Alegeti tipul de tractiune al masinii',
+    )
+
 
 
 class Adrese(models.Model):
