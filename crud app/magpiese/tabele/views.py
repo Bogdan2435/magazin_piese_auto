@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect
 from .forms import *
 from .models import *
 
-# Create your views here.
 
+################### HOME #####################
 def home(request):
     context = {}
     return render(request, 'home.html', context)
 
+
+################### CREATE #####################
 def create(request):
     context = {}
     return render(request, 'create.html', context)
@@ -51,6 +53,8 @@ def create_Client(request):
         form = ClientiForm()
     return render(request, 'create_clienti.html', {'form':form})
 
+
+################### SEARCH #####################
 def search(request):
     context = {}
     return render(request, 'search.html', context)
@@ -66,8 +70,20 @@ def read_Angajati(request):
 
 def read_LocuriMunca(request):
     locuriMunca = LocuriMunca.objects.all()
-    return render(request, 'search_locurimunca.html', {'locuriMunca':locuriMunca})
+    context = {
+        'locuriMunca':locuriMunca,
+    }
+    return render(request, 'search_locurimunca.html', context)
 
+def read_Clienti(request):
+    clienti = Clienti.objects.all()
+    context = {
+        'clienti': clienti,
+    }
+    return render(request, 'search_clienti.html', context)
+
+
+################### UPDATE #####################
 def update_LocuriMunca(request, pk):
     locMunca = LocuriMunca.objects.get(id=pk)
     form = LocMuncaForm(instance=locMunca)
@@ -100,6 +116,8 @@ def update_Angajati(request, pk):
     }
     return render(request, 'update_angajati.html', context)
 
+
+################### DELETE #####################
 def delete_LocuriMunca(request, pk):
     locMunca = LocuriMunca.objects.get(id=pk)
 
@@ -123,5 +141,3 @@ def delete_Angajati(request, pk):
         'angajat': angajat,
     }
     return render(request, 'delete_angajati.html', context)
-
-
