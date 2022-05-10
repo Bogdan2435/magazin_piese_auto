@@ -4,6 +4,10 @@ from .models import *
 
 # Create your views here.
 
+def home(request):
+    context = {}
+    return render(request, 'home.html', context)
+
 def create(request):
     context = {}
     return render(request, 'create.html', context)

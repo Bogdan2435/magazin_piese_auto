@@ -1,7 +1,10 @@
 from django.urls import path
 from . import views
+from django.views.generic import RedirectView
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='home/', permanent=True)),
+    path('home/', views.home, name='home'),
     path('create/', views.create, name='create'),
     path('create/locmunca', views.create_LocMunca, name='create_locmunca'),
     path('create/anagajati', views.create_Angajat, name='create_angajat'),
