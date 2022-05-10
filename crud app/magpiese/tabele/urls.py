@@ -8,6 +8,7 @@ urlpatterns = [
     path('create/', views.create, name='create'),
     path('create/locmunca', views.create_LocMunca, name='create_locmunca'),
     path('create/anagajati', views.create_Angajat, name='create_angajat'),
+    path('create/clienti', views.create_Client, name='create_client'),
     path('search/', views.search, name='search'),
     path('search/locurimunca', views.read_LocuriMunca, name='search_locurimunca'),
     path('search/angajati', views.read_Angajati, name='search_angajati'),

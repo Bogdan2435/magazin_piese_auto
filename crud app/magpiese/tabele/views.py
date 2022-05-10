@@ -38,6 +38,19 @@ def create_Angajat(request):
         form = AngajatiForm()
     return render(request, 'create_angajati.html', {'form':form}) 
 
+def create_Client(request):
+    if request.method == "POST":
+        form = ClientiForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('../create/')
+            except:
+                pass
+    else:
+        form = ClientiForm()
+    return render(request, 'create_clienti.html', {'form':form})
+
 def search(request):
     context = {}
     return render(request, 'search.html', context)

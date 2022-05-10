@@ -23,7 +23,7 @@ class Angajati(models.Model):
     email = models.CharField(max_length=255)
     data_angajare = models.DateField()
     data_nasterii = models.DateField()
-    loc_munca = models.ForeignKey(LocuriMunca, on_delete = models.PROTECT)
+    loc_munca = models.ForeignKey(LocuriMunca, null =True, on_delete = models.RESTRICT)
 
     class Meta:
         verbose_name = 'Angajat'
@@ -32,7 +32,17 @@ class Angajati(models.Model):
     def __str__(self):
         return '%s %s' % (self.nume_familie, self.prenume)
 
-        
+class Clienti(models.Model):
+    cnp = models.CharField(max_length=13, primary_key=True)
+    nume_familie = models.CharField(max_length=255)
+    prenume = models.CharField(max_length=255)
+    nr_telefon = models.CharField(max_length=12)
+    email = models.CharField(max_length=255)
+
+# class Modele_Masini(models.Model):
+#     marca = models.CharField(max_length=255)
+#     model = models.CharField(max_length=255)
+
 
 class Adrese(models.Model):
     tara = models.CharField(max_length=255)
