@@ -116,6 +116,22 @@ def update_Angajati(request, pk):
     }
     return render(request, 'update_angajati.html', context)
 
+def update_Clienti(request, pk):
+    client = Clienti.objects.get(cnp=pk)
+    form = ClientiForm(instance=client)
+
+    if request.method == 'POST':
+        form = ClientiForm(request.POST, instance=client)
+        if form.is_valid():
+            form.save()
+            return redirect('/search/clienti')
+
+    context = {
+        'client': client,
+        'form': form,
+    }
+    return render(request, 'update_clienti.html', context)
+
 
 ################### DELETE #####################
 def delete_LocuriMunca(request, pk):

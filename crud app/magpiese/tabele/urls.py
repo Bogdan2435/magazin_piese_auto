@@ -15,6 +15,7 @@ urlpatterns = [
     path('search/clienti', views.read_Clienti, name='search_clienti'),
     path('update/locurimunca/<int:pk>', views.update_LocuriMunca, name='update_locurimunca'),
     path('update/angajati/<int:pk>', views.update_Angajati, name='update_locurimunca'),
+    path('update/clienti/<int:pk>', views.update_Clienti, name='update_clienti'),
     path('delete/locurimunca/<int:pk>', views.delete_LocuriMunca, name='delete_locurimunca'),
     path('delete/angajati/<int:pk>', views.delete_Angajati, name='delete_angajati'),
     # path('search/', views.search, name='search'),
