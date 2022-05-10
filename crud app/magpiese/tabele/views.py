@@ -157,3 +157,15 @@ def delete_Angajati(request, pk):
         'angajat': angajat,
     }
     return render(request, 'delete_angajati.html', context)
+
+def delete_Clienti(request, pk):
+    client = Clienti.objects.get(cnp=pk)
+
+    if request.method == 'POST':
+        client.delete()
+        return redirect('/search/clienti')
+
+    context = {
+        'client': client,
+    }
+    return render(request, 'delete_clienti.html', context)
