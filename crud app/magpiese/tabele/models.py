@@ -2,8 +2,6 @@ from statistics import mode
 from tabnanny import verbose
 from django.db import models
 
-# Create your models here.
-
 class LocuriMunca(models.Model):
     denumire = models.CharField(max_length=255)
     salariu_min = models.IntegerField()
@@ -52,8 +50,7 @@ class Modele_Masini(models.Model):
     an_incepere_productie = models.PositiveSmallIntegerField()
     an_finalizare_productie = models.PositiveSmallIntegerField()
     motorizare_cc = models.IntegerField(
-        null=True, 
-        blank=True,
+        default='0'
     )
     putere_cp = models.IntegerField()
 
@@ -75,8 +72,7 @@ class Modele_Masini(models.Model):
 
     cod_motor = models.CharField(
         max_length=255,
-        null=True, 
-        blank=True,
+        default='Nu exista'
 )
 
     SISTEM_TRACTIUNE = (
@@ -99,7 +95,18 @@ class Modele_Masini(models.Model):
     def __str__(self):
         return '%s %s an %s' % (self.marca, self.model, self.an_incepere_productie)
 
+class Piese(models.Model):
+    denumire = models.CharField(max_length=255)
+    producator = models.CharField(max_length=255)
+    interval_recomandat_schimb = models.CharField(max_length=255, default = "nu exista")
+    pret_ron = models.IntegerField()
 
+    class Meta:
+        verbose_name = 'Piesa'
+        verbose_name_plural = 'Piese'
+
+    def __str__(self):
+        return '%s produs de %s' % (self.denumire, self.producator)
 
 class Adrese(models.Model):
     tara = models.CharField(max_length=255)
