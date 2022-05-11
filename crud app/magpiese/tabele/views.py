@@ -53,6 +53,19 @@ def create_Client(request):
         form = ClientiForm()
     return render(request, 'create_clienti.html', {'form':form})
 
+def create_Model(request):
+    if request.method == "POST":
+        form = ModeleForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('../create/')
+            except:
+                pass
+    else:
+        form = ModeleForm()
+    return render(request, 'create_modele.html', {'form':form})
+
 
 ################### SEARCH #####################
 def search(request):
@@ -81,6 +94,13 @@ def read_Clienti(request):
         'clienti': clienti,
     }
     return render(request, 'search_clienti.html', context)
+
+def read_Modele(request):
+    modele = Modele_Masini.objects.all()
+    context = {
+        'modele': modele,
+    }
+    return render(request, 'search_modele.html', context)
 
 
 ################### UPDATE #####################
@@ -132,6 +152,22 @@ def update_Clienti(request, pk):
     }
     return render(request, 'update_clienti.html', context)
 
+def update_Modele(request, pk):
+    modelMasina = Modele_Masini.objects.get(id=pk)
+    form = ModeleForm(instance=modelMasina)
+
+    if request.method == 'POST':
+        form = ModeleForm(request.POST, instance=modelMasina)
+        if form.is_valid():
+            form.save()
+            return redirect('/search/modele')
+
+    context = {
+        'modelMasina': modelMasina,
+        'form': form,
+    }
+    return render(request, 'update_modele.html', context)
+
 
 ################### DELETE #####################
 def delete_LocuriMunca(request, pk):
@@ -169,3 +205,15 @@ def delete_Clienti(request, pk):
         'client': client,
     }
     return render(request, 'delete_clienti.html', context)
+
+def delete_Modele(request, pk):
+    modelMasina = Modele_Masini.objects.get(id=pk)
+
+    if request.method == 'POST':
+        modelMasina.delete()
+        return redirect('/search/modele')
+
+    context = {
+        'modelMasina': modelMasina,
+    }
+    return render(request, 'delete_modele.html', context)

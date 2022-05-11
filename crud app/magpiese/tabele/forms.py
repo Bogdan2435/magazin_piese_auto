@@ -17,3 +17,8 @@ class ClientiForm(forms.ModelForm):
     class Meta:
         model = Clienti
         fields = "__all__"
+
+class ModeleForm(forms.ModelForm):
+    class Meta:
+        model = Modele_Masini
+        fields = "__all__"
