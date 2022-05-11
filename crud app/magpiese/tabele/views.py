@@ -92,6 +92,19 @@ def create_PiesaModel(request):
         form = PiesaModelForm()
     return render(request, 'create_piesamodel.html', {'form':form}) 
 
+def create_Masina(request):
+    if request.method == "POST":
+        form = MasiniForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('../create/')
+            except:
+                pass
+    else:
+        form = MasiniForm()
+    return render(request, 'create_masina.html', {'form':form}) 
+
 
 ################### SEARCH #####################
 def search(request):
@@ -146,6 +159,13 @@ def read_PiesaModel(request):
 
     }
     return render(request, 'search_piesaModel.html', context)
+
+def read_Masini(request):
+    masini = Masini.objects.all()
+    context = {
+        'masini': masini,
+    }
+    return render(request, 'search_masini.html', context)
 
 ################### UPDATE #####################
 def update_LocuriMunca(request, pk):
@@ -244,6 +264,22 @@ def update_PiesaModel(request, pk):
     }
     return render(request, 'update_piesamodel.html', context)
 
+def update_Masini(request, pk):
+    masina = Masini.objects.get(vin=pk)
+    form = MasiniForm(instance=masina)
+
+    if request.method == 'POST':
+        form = MasiniForm(request.POST, instance=masina)
+        if form.is_valid():
+            form.save()
+            return redirect('/search/masini')
+
+    context = {
+        'masina': masina,
+        'form': form,
+    }
+    return render(request, 'update_masini.html', context)
+
 ################### DELETE #####################
 def delete_LocuriMunca(request, pk):
     locMunca = LocuriMunca.objects.get(id=pk)
@@ -321,3 +357,14 @@ def delete_PiesaModel(request, pk):
     }
     return render(request, 'delete_piesamodel.html', context)
 
+def delete_Masini(request, pk):
+    masina = Masini.objects.get(vin=pk)
+
+    if request.method == 'POST':
+        masina.delete()
+        return redirect('/search/masini')
+
+    context = {
+        'masina': masina,
+    }
+    return render(request, 'delete_masini.html', context)
