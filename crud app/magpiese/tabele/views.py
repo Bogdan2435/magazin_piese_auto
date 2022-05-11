@@ -66,6 +66,19 @@ def create_Model(request):
         form = ModeleForm()
     return render(request, 'create_modele.html', {'form':form})
 
+def create_Piesa(request):
+    if request.method == "POST":
+        form = PieseForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('../create/')
+            except:
+                pass
+    else:
+        form = PieseForm()
+    return render(request, 'create_piese.html', {'form':form})
+
 
 ################### SEARCH #####################
 def search(request):
@@ -102,6 +115,12 @@ def read_Modele(request):
     }
     return render(request, 'search_modele.html', context)
 
+def read_Piese(request):
+    piese = Piese.objects.all()
+    context = {
+        'piese': piese,
+    }
+    return render(request, 'search_piese.html', context)
 
 ################### UPDATE #####################
 def update_LocuriMunca(request, pk):
@@ -168,6 +187,22 @@ def update_Modele(request, pk):
     }
     return render(request, 'update_modele.html', context)
 
+def update_Piese(request, pk):
+    piesa = Piese.objects.get(id=pk)
+    form = PieseForm(instance=piesa)
+
+    if request.method == 'POST':
+        form = PieseForm(request.POST, instance=piesa)
+        if form.is_valid():
+            form.save()
+            return redirect('/search/piese')
+
+    context = {
+        'piesa': piesa,
+        'form': form,
+    }
+    return render(request, 'update_piese.html', context)
+
 
 ################### DELETE #####################
 def delete_LocuriMunca(request, pk):
@@ -217,3 +252,15 @@ def delete_Modele(request, pk):
         'modelMasina': modelMasina,
     }
     return render(request, 'delete_modele.html', context)
+
+def delete_Piese(request, pk):
+    piesa = Piese.objects.get(id=pk)
+
+    if request.method == 'POST':
+        piesa.delete()
+        return redirect('/search/piese')
+
+    context = {
+        'piesa': piesa,
+    }
+    return render(request, 'delete_piese.html', context)

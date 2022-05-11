@@ -22,3 +22,8 @@ class ModeleForm(forms.ModelForm):
     class Meta:
         model = Modele_Masini
         fields = "__all__"
+
+class PieseForm(forms.ModelForm):
+    class Meta:
+        model = Piese
+        fields = "__all__"

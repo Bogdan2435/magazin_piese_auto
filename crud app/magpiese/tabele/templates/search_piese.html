@@ -29,36 +29,38 @@
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 
-    <title>Search Locuri Munca</title>
+    <title>Search Piese</title>
 </head>
 
 <body>
     <h1></h1>
-    <h2 style="text-align:center"> Locuri de munca </h2>
+    <h2 style="text-align:center"> Piese </h2>
     <div class="container">
         <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th>ID Loc Munca</th>
-                    <th>Denumire Loc Munca</th>
-                    <th>salariu_min</th>
-                    <th>salariu_max</th>
+                    <th>ID Piesa</th>
+                    <th>Piesa</th>
+                    <th>Producator</th>
+                    <th>Interval Schimb</th>
+                    <th>Pret Ron</th>
                     <th>Edit</th>
                     <th>Remove</th>
                 </tr>
             </thead>
             <tbody>
-                {% for locMunca in locuriMunca %}
+                {% for piesa in piese %}
                 <tr>
-                    <td>{{locMunca.id}}</td>
-                    <td>{{locMunca.denumire}}</td>
-                    <td>{{locMunca.salariu_min}}</td>
-                    <td>{{locMunca.salariu_max}}</td>
+                    <td>{{piesa.id}}</td>
+                    <td>{{piesa.denumire}}</td>
+                    <td>{{piesa.producator}}</td>
+                    <td>{{piesa.interval_recomandat_schimb}}</td>
+                    <td>{{piesa.pret_ron}}</td>
                     <td>
-                        <a href="/update/locurimunca/{{locMunca.pk}}">Update</a>
+                        <a href="/update/piese/{{piesa.pk}}">Update</a>
                     </td>
                     <td>
-                        <a href="/delete/locurimunca/{{locMunca.pk}}">Delete</a>
+                        <a href="/delete/piese/{{piesa.pk}}">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -66,7 +68,7 @@
         </table>
     </div>
 
-    <center><a href="{% url 'create_locmunca' %}">Adauga un loc de munca.</a></center>
+    <center><a href="{% url 'create_piesa' %}">Adauga o piesa.</a></center>
     <center><a href="{% url 'home' %}">Return home</a></center>
 </body>
 
