@@ -27,3 +27,8 @@ class PieseForm(forms.ModelForm):
     class Meta:
         model = Piese
         fields = "__all__"
+
+class PiesaModelForm(forms.ModelForm):
+    class Meta:
+        model = Piesa_Model
+        fields = "__all__"

@@ -79,6 +79,19 @@ def create_Piesa(request):
         form = PieseForm()
     return render(request, 'create_piese.html', {'form':form})
 
+def create_PiesaModel(request):
+    if request.method == "POST":
+        form = PiesaModelForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('../create/')
+            except:
+                pass
+    else:
+        form = PiesaModelForm()
+    return render(request, 'create_piesamodel.html', {'form':form}) 
+
 
 ################### SEARCH #####################
 def search(request):
@@ -121,6 +134,18 @@ def read_Piese(request):
         'piese': piese,
     }
     return render(request, 'search_piese.html', context)
+
+def read_PiesaModel(request):
+    piesaModel = Piesa_Model.objects.all()
+    piese = Piese.objects.all()
+    modele = Modele_Masini.objects.all()
+    context = {
+        'piesaModel': piesaModel,
+        'piese': piese,
+        'modele': modele,
+
+    }
+    return render(request, 'search_piesaModel.html', context)
 
 ################### UPDATE #####################
 def update_LocuriMunca(request, pk):
@@ -203,6 +228,21 @@ def update_Piese(request, pk):
     }
     return render(request, 'update_piese.html', context)
 
+def update_PiesaModel(request, pk):
+    piesamodel = Piesa_Model.objects.get(id=pk)
+    form = PiesaModelForm(instance=piesamodel)
+
+    if request.method == 'POST':
+        form = PiesaModelForm(request.POST, instance=piesamodel)
+        if form.is_valid():
+            form.save()
+            return redirect('/search/piesamodel')
+
+    context = {
+        'piesamodel': piesamodel,
+        'form': form,
+    }
+    return render(request, 'update_piesamodel.html', context)
 
 ################### DELETE #####################
 def delete_LocuriMunca(request, pk):
@@ -264,3 +304,20 @@ def delete_Piese(request, pk):
         'piesa': piesa,
     }
     return render(request, 'delete_piese.html', context)
+
+def delete_PiesaModel(request, pk):
+    piesamodel = Piesa_Model.objects.get(id=pk)
+    piese = Piese.objects.all()
+    modele = Modele_Masini.objects.all()
+
+    if request.method == 'POST':
+        piesamodel.delete()
+        return redirect('/search/piesamodel')
+
+    context = {
+        'piesamodel': piesamodel,
+        'piese': piese,
+        'modele': modele,
+    }
+    return render(request, 'delete_piesamodel.html', context)
+
