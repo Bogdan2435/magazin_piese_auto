@@ -23,7 +23,7 @@ class Angajati(models.Model):
     email = models.CharField(max_length=255)
     data_angajare = models.DateField()
     data_nasterii = models.DateField()
-    loc_munca = models.ForeignKey(LocuriMunca, null =True, on_delete = models.RESTRICT)
+    loc_munca = models.ForeignKey(LocuriMunca, null=True, on_delete = models.RESTRICT)
 
     class Meta:
         verbose_name = 'Angajat'
@@ -39,12 +39,22 @@ class Clienti(models.Model):
     nr_telefon = models.CharField(max_length=12)
     email = models.CharField(max_length=255)
 
+    class Meta:
+        verbose_name = 'Client'
+        verbose_name_plural = 'Clienti'
+
+    def __str__(self):
+        return '%s %s' % (self.nume_familie, self.prenume)
+
 class Modele_Masini(models.Model):
     marca = models.CharField(max_length=255)
     model = models.CharField(max_length=255)
     an_incepere_productie = models.PositiveSmallIntegerField()
     an_finalizare_productie = models.PositiveSmallIntegerField()
-    motorizare_cc = models.IntegerField(null=True)
+    motorizare_cc = models.IntegerField(
+        null=True, 
+        blank=True,
+    )
     putere_cp = models.IntegerField()
 
     MOTORIZARI = (
@@ -63,7 +73,11 @@ class Modele_Masini(models.Model):
         help_text = 'Alegeti combustibilul masinii',
     )
 
-    cod_motor = models.CharField(max_length=255)
+    cod_motor = models.CharField(
+        max_length=255,
+        null=True, 
+        blank=True,
+)
 
     SISTEM_TRACTIUNE = (
         ('fata', 'fata'),
@@ -77,6 +91,13 @@ class Modele_Masini(models.Model):
         default = 'fata',
         help_text = 'Alegeti tipul de tractiune al masinii',
     )
+
+    class Meta:
+        verbose_name = 'Model Masina'
+        verbose_name_plural = 'Modele Masini'
+
+    def __str__(self):
+        return '%s %s an %s' % (self.marca, self.model, self.an_incepere_productie)
 
 
 
