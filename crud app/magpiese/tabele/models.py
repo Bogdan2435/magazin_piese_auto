@@ -129,6 +129,19 @@ class Piesa_Model(models.Model):
         verbose_name = 'Legatura Piesa - Model'
         verbose_name_plural = 'Legaturi Piesa - Model'
 
+class Masini(models.Model):
+    vin = models.CharField(max_length=17, primary_key=True)
+    nr_inmatriculare = models.CharField(max_length=10)
+    an_fabricatie = models.PositiveSmallIntegerField()
+    kilometraj = models.CharField(max_length = 9, default='0')
+
+    class Meta:
+        verbose_name = 'Masina'
+        verbose_name_plural = 'Masini'
+
+    def __str__(self):
+        return self.nr_inmatriculare
+
 class Adrese(models.Model):
     tara = models.CharField(max_length=255)
     judet = models.CharField(max_length=255)
