@@ -1,5 +1,6 @@
 from statistics import mode
 from tabnanny import verbose
+
 from django.db import models
 
 class LocuriMunca(models.Model):
@@ -107,6 +108,26 @@ class Piese(models.Model):
 
     def __str__(self):
         return '%s produs de %s' % (self.denumire, self.producator)
+
+class Piesa_Model(models.Model):
+    piesa = models.ForeignKey(Piese, on_delete = models.PROTECT)
+    model = models.ForeignKey(Modele_Masini, on_delete = models.PROTECT)
+
+    ORIGINALA = (
+        ('originala', 'originala'),
+        ('compatibila', 'compatibila'),
+    )
+
+    originala = models.CharField(
+        max_length = 20,
+        choices = ORIGINALA,
+        default = 'originala',
+        help_text = 'Alegeti daca piesa este originala sau nu.'
+    )
+
+    class Meta:
+        verbose_name = 'Legatura Piesa - Model'
+        verbose_name_plural = 'Legaturi Piesa - Model'
 
 class Adrese(models.Model):
     tara = models.CharField(max_length=255)
