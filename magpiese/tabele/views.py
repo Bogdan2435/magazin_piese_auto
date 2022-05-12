@@ -118,6 +118,19 @@ def create_Comanda(request):
         form = ComenziForm()
     return render(request, 'create_comanda.html', {'form':form}) 
 
+def create_ComandaPiesa(request):
+    if request.method == "POST":
+        form = ComandaPiesaForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('../create/')
+            except:
+                pass
+    else:
+        form = ComandaPiesaForm()
+    return render(request, 'create_comandapiesa.html', {'form':form})
+
 
 ################### SEARCH #####################
 def search(request):
@@ -209,6 +222,19 @@ def read_Comenzi(request):
         'clienti': clienti,
     }
     return render(request, 'search_comenzi.html', context)
+
+def read_ComandaPiesa(request):
+    legaturi = ComandaPiesa.objects.all()
+    comenzi = Comenzi.objects.all()
+    piese = Piese.objects.all()
+
+    context = {
+        'legaturi': legaturi,
+        'comenzi': comenzi,
+        'piese': piese,
+
+    }
+    return render(request, 'search_comandapiesa.html', context)
 
 ################### UPDATE #####################
 def update_LocuriMunca(request, pk):
@@ -339,6 +365,22 @@ def update_Comenzi(request, pk):
     }
     return render(request, 'update_comenzi.html', context)
 
+def update_ComandaPiesa(request, pk):
+    legatura = ComandaPiesa.objects.get(id=pk)
+    form = ComandaPiesaForm(instance=legatura)
+
+    if request.method == 'POST':
+        form = ComandaPiesaForm(request.POST, instance = legatura)
+        if form.is_valid():
+            form.save()
+            return redirect('/search/comandapiesa')
+
+    context = {
+        'legatura': legatura,
+        'form': form,
+    }
+    return render(request, 'update_comandapiesa.html', context)
+
 ################### DELETE #####################
 def delete_LocuriMunca(request, pk):
     locMunca = LocuriMunca.objects.get(id=pk)
@@ -440,3 +482,18 @@ def delete_Comenzi(request, pk):
     }
     return render(request, 'delete_comenzi.html', context)
 
+def delete_ComandaPiesa(request, pk):
+    legatura = ComandaPiesa.objects.get(id=pk)
+    comenzi = Comenzi.objects.all()
+    piese = Piese.objects.all()
+
+    if request.method == 'POST':
+        legatura.delete()
+        return redirect('/search/comandapiesa')
+
+    context = {
+        'legatura': legatura,
+        'comenzi': comenzi,
+        'piese': piese,
+    }
+    return render(request, 'delete_comandapiesa.html', context)

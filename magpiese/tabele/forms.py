@@ -49,3 +49,9 @@ class ComenziForm(forms.ModelForm):
     class Meta:
         model = Comenzi
         fields = "__all__"
+
+
+class ComandaPiesaForm(forms.ModelForm):
+    class Meta:
+        model = ComandaPiesa
+        fields = "__all__"
