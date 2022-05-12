@@ -208,4 +208,14 @@ class Comenzi(models.Model):
         return 'comanda din data %s cu id-ul %s' % (self.data_comanda, self.pk)
 
 
+class ComandaPiesa(models.Model):
+    comanda = models.ForeignKey(Comenzi, on_delete = models.PROTECT)
+    piesa = models.ForeignKey(Piese, on_delete = models.PROTECT)
+    nr_piese = models.IntegerField(default = '1')
+
+    class Meta:
+        verbose_name = 'Legatura Comanda - Piesa'
+        verbose_name_plural = 'Legaturi Comenzi - Piese'
+
+
 
