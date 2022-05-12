@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from tabele.models import Adrese, Angajati, Clienti, ComandaPiesa, Comenzi, LocuriMunca, Masini, Modele_Masini, Piesa_Model, Piese
+from tabele.models import Adrese, Angajati, Clienti, ComandaPiesa, Comenzi, Livrari, LocuriMunca, Masini, Modele_Masini, Piesa_Model, Piese
 
 class PiesaModelInline(admin.TabularInline):
     model = Piesa_Model
@@ -24,9 +24,11 @@ class ComenziAdmin(admin.ModelAdmin):
     inlines = (ComandaPiesaInline, )
     model = Comenzi
 
+
 admin.site.register(LocuriMunca)
 admin.site.register(Angajati)
 admin.site.register(Adrese)
+admin.site.register(Livrari)
 admin.site.register(Clienti)
 admin.site.register(Modele_Masini, ModeleMasiniAdmin)
 admin.site.register(Piese, PieseAdmin)

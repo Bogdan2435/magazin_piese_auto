@@ -218,4 +218,31 @@ class ComandaPiesa(models.Model):
         verbose_name_plural = 'Legaturi Comenzi - Piese'
 
 
+class Livrari(models.Model):
+    awb = models.CharField(
+        max_length = 255,
+        primary_key = True,
+    )
+    angajat = models.ForeignKey(Angajati, on_delete = models.RESTRICT)
+    comanda = models.ForeignKey(Comenzi, on_delete = models.RESTRICT)
+    adresa = models.ForeignKey(Adrese, on_delete = models.RESTRICT)
+
+    STATUS_LIVRARE = (
+        ('primita', 'primita'),
+        ('in curs de livrare', 'in curs de livrare'),
+        ('livrata', 'livrata'),
+    )
+
+    status_livrare = models.CharField(
+        max_length = 30,
+        choices = STATUS_LIVRARE,
+        default = 'primita',
+    )
+
+    data_programata_livrare = models.DateField()
+
+    class Meta:
+        verbose_name = 'Livrare'
+        verbose_name_plural = 'Livrari'
+
 
