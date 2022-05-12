@@ -3,6 +3,7 @@ from tabnanny import verbose
 
 from django.db import models
 
+
 class LocuriMunca(models.Model):
     denumire = models.CharField(max_length=255)
     salariu_min = models.IntegerField()
@@ -14,6 +15,7 @@ class LocuriMunca(models.Model):
         
     def __str__(self):
         return self.denumire
+
 
 class Angajati(models.Model):
     nume_familie = models.CharField(max_length=255)
@@ -31,6 +33,7 @@ class Angajati(models.Model):
     def __str__(self):
         return '%s %s' % (self.nume_familie, self.prenume)
 
+
 class Clienti(models.Model):
     cnp = models.CharField(max_length=13, primary_key=True)
     nume_familie = models.CharField(max_length=255)
@@ -44,6 +47,7 @@ class Clienti(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.nume_familie, self.prenume)
+
 
 class Modele_Masini(models.Model):
     marca = models.CharField(max_length=255)
@@ -96,6 +100,7 @@ class Modele_Masini(models.Model):
     def __str__(self):
         return '%s %s an %s' % (self.marca, self.model, self.an_incepere_productie)
 
+
 class Piese(models.Model):
     denumire = models.CharField(max_length=255)
     producator = models.CharField(max_length=255)
@@ -108,6 +113,7 @@ class Piese(models.Model):
 
     def __str__(self):
         return '%s produs de %s' % (self.denumire, self.producator)
+
 
 class Piesa_Model(models.Model):
     piesa = models.ForeignKey(Piese, on_delete = models.PROTECT)
@@ -129,6 +135,7 @@ class Piesa_Model(models.Model):
         verbose_name = 'Legatura Piesa - Model'
         verbose_name_plural = 'Legaturi Piesa - Model'
 
+
 class Masini(models.Model):
     vin = models.CharField(max_length=17, primary_key=True)
     nr_inmatriculare = models.CharField(max_length=10)
@@ -141,6 +148,7 @@ class Masini(models.Model):
 
     def __str__(self):
         return self.nr_inmatriculare
+
 
 class Adrese(models.Model):
     tara = models.CharField(max_length=255)
@@ -159,5 +167,45 @@ class Adrese(models.Model):
 
     def __str__(self):
         return 'strada %s din localitatea %s judetul %s' % (self.strada, self.localitate, self.judet)
+
+
+class Comenzi(models.Model):
+    data_comanda = models.DateField()
+    masina_nr = models.ForeignKey(Masini, on_delete = models.RESTRICT)
+    client_nume = models.ForeignKey(Clienti, on_delete = models.RESTRICT)
+    angajat_nume = models.ForeignKey(Angajati, on_delete = models.RESTRICT)
+
+    TIP_LIVRARE = (
+        ('ridicare personala', 'ridicare personala'),
+        ('livrare', 'livrare'), 
+    ) 
+
+    mod_livrare = models.CharField(
+        max_length = 20,
+        choices = TIP_LIVRARE,
+        default = 'livrare',
+    )
+
+    STATUS_COMANDA = (
+        ('plasata', 'plasata'),
+        ('pregatita pentru ridicare', 'pregatita pentru ridicare'),
+        ('in curs de livrare', 'in curs de livrare'),
+        ('ridicata', 'ridicata'),
+        ('livrata', 'livrata')
+    )
+
+    status_comanda = models.CharField(
+        max_length = 30,
+        choices = STATUS_COMANDA,
+        default = 'plasata',
+    )
+
+    class Meta:
+        verbose_name = 'Comanda'
+        verbose_name_plural = 'Comenzi'
+
+    def __str__(self):
+        return 'comanda clientului %s din data %s cu id-ul %s' % (self.client_cnp, self.data_comanda, self.pk)
+
 
 
