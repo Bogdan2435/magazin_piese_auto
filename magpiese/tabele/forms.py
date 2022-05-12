@@ -61,3 +61,8 @@ class AdreseForm(forms.ModelForm):
     class Meta:
         model = Adrese
         fields = "__all__"
+
+class LivrariForm(forms.ModelForm):
+    class Meta:
+        model = Livrari
+        fields = "__all__"

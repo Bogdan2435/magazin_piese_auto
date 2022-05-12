@@ -144,6 +144,19 @@ def create_Adresa(request):
         form = AdreseForm()
     return render(request, 'create_adresa.html', {'form':form})
 
+def create_Livrare(request):
+    if request.method == "POST":
+        form = LivrariForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('../create/')
+            except:
+                pass
+    else:
+        form = LivrariForm()
+    return render(request, 'create_livrare.html', {'form':form})
+
 
 ################### SEARCH #####################
 def search(request):
@@ -256,6 +269,20 @@ def read_Adrese(request):
         'adrese': adrese,
     }
     return render(request, 'search_adrese.html', context)
+
+def read_Livrari(request):
+    livrari = Livrari.objects.all()
+    angajati = Angajati.objects.all()
+    comenzi = Comenzi.objects.all()
+    adrese = Adrese.objects.all()
+
+    context = {
+        'livrari': livrari,
+        'angajati': angajati,
+        'comenzi': comenzi,
+        'adrese': adrese,
+    }
+    return render(request, 'search_livrari.html', context)
 
 ################### UPDATE #####################
 def update_LocuriMunca(request, pk):
@@ -418,6 +445,22 @@ def update_Adrese(request, pk):
     }
     return render(request, 'update_adrese.html', context)
 
+def update_Livrare(request, pk):
+    livrare = Livrari.objects.get(awb=pk)
+    form = LivrariForm(instance=livrare)
+
+    if request.method == 'POST':
+        form = LivrariForm(request.POST, instance=livrare)
+        if form.is_valid():
+            form.save()
+            return redirect('/search/livrari')
+
+    context = {
+        'livrare': livrare,
+        'form': form,
+    }
+    return render(request, 'update_livrari.html', context)
+
 ################### DELETE #####################
 def delete_LocuriMunca(request, pk):
     locMunca = LocuriMunca.objects.get(id=pk)
@@ -546,3 +589,15 @@ def delete_Adrese(request, pk):
         'adresa': adresa,
     }
     return render(request, 'delete_adrese.html', context)
+
+def delete_Livrari(request, pk):
+    livrare = Livrari.objects.get(awb=pk)
+
+    if request.method == 'POST':
+        livrare.delete()
+        return redirect('/search/livrari')
+
+    context = {
+        'livrare': livrare,
+    }
+    return render(request, 'delete_livrari.html', context)
