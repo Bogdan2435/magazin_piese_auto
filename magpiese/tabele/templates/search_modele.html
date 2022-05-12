@@ -49,6 +49,7 @@
                     <th>Combustibil</th>
                     <th>Cod Motor</th>
                     <th>Tractiune</th>
+                    <th>Piese care sunt compatibile</th>
                     <th>Edit</th>
                     <th>Remove</th>
                 </tr>
@@ -66,6 +67,17 @@
                     <td>{{model.combustibil}}</td>
                     <td>{{model.cod_motor}}</td>
                     <td>{{model.tip_tractiune}}</td>
+                    <td>
+                        {% for legatura in legaturi %}
+                        {% if legatura.model_id == model.id %}
+                        {% for piesa in piese %}
+                        {% if piesa.id == legatura.piesa_id %}
+                        {{piesa.denumire}} {{piesa.producator}},
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        {% endfor %}
+                    </td>
                     <td>
                         <a href="/update/modele/{{model.pk}}">Update</a>
                     </td>

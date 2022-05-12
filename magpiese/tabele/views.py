@@ -114,6 +114,7 @@ def search(request):
 def read_Angajati(request):
     angajati = Angajati.objects.all()
     locuriMunca = LocuriMunca.objects.all()
+
     context = {
         'angajati': angajati,
         'locuriMunca': locuriMunca,
@@ -122,6 +123,7 @@ def read_Angajati(request):
 
 def read_LocuriMunca(request):
     locuriMunca = LocuriMunca.objects.all()
+
     context = {
         'locuriMunca':locuriMunca,
     }
@@ -129,6 +131,7 @@ def read_LocuriMunca(request):
 
 def read_Clienti(request):
     clienti = Clienti.objects.all()
+
     context = {
         'clienti': clienti,
     }
@@ -136,15 +139,26 @@ def read_Clienti(request):
 
 def read_Modele(request):
     modele = Modele_Masini.objects.all()
+    legaturi = Piesa_Model.objects.all()
+    piese = Piese.objects.all()
+
     context = {
         'modele': modele,
+        'legaturi': legaturi,
+        'piese': piese,
     }
     return render(request, 'search_modele.html', context)
 
 def read_Piese(request):
     piese = Piese.objects.all()
+    legaturi = Piesa_Model.objects.all()
+    modele = Modele_Masini.objects.all()
+    
+
     context = {
         'piese': piese,
+        'legaturi': legaturi,
+        'modele': modele,
     }
     return render(request, 'search_piese.html', context)
 
@@ -152,6 +166,7 @@ def read_PiesaModel(request):
     piesaModel = Piesa_Model.objects.all()
     piese = Piese.objects.all()
     modele = Modele_Masini.objects.all()
+
     context = {
         'piesaModel': piesaModel,
         'piese': piese,
@@ -162,6 +177,7 @@ def read_PiesaModel(request):
 
 def read_Masini(request):
     masini = Masini.objects.all()
+
     context = {
         'masini': masini,
     }

@@ -44,6 +44,7 @@
                     <th>Producator</th>
                     <th>Interval Schimb</th>
                     <th>Pret</th>
+                    <th>Modele pentru care se potriveste</th>
                     <th>Edit</th>
                     <th>Remove</th>
                 </tr>
@@ -56,6 +57,17 @@
                     <td>{{piesa.producator}}</td>
                     <td>{{piesa.interval_recomandat_schimb}}</td>
                     <td>{{piesa.pret_ron}} RON</td>
+                    <td>
+                        {% for legatura in legaturi %}
+                        {% if legatura.piesa_id == piesa.id %}
+                        {% for model in modele %}
+                        {% if piesa.id == legatura.piesa_id %}
+                        {{model.marca}} {{model.model}} {{model.an_incepere_productie}}, 
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        {% endfor %}
+                    </td>
                     <td>
                         <a href="/update/piese/{{piesa.pk}}">Update</a>
                     </td>
