@@ -103,7 +103,20 @@ def create_Masina(request):
                 pass
     else:
         form = MasiniForm()
-    return render(request, 'create_masina.html', {'form':form}) 
+    return render(request, 'create_masina.html', {'form':form})
+
+def create_Comanda(request):
+    if request.method == "POST":
+        form = ComenziForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('../create/')
+            except:
+                pass
+    else:
+        form = ComenziForm()
+    return render(request, 'create_comanda.html', {'form':form}) 
 
 
 ################### SEARCH #####################
@@ -182,6 +195,20 @@ def read_Masini(request):
         'masini': masini,
     }
     return render(request, 'search_masini.html', context)
+
+def read_Comenzi(request):
+    comenzi = Comenzi.objects.all()
+    masini = Masini.objects.all()
+    angajati = Angajati.objects.all()
+    clienti = Clienti.objects.all()
+
+    context = {
+        'comenzi': comenzi,
+        'masini': masini,
+        'angajati': angajati,
+        'clienti': clienti,
+    }
+    return render(request, 'search_comenzi.html', context)
 
 ################### UPDATE #####################
 def update_LocuriMunca(request, pk):
@@ -296,6 +323,22 @@ def update_Masini(request, pk):
     }
     return render(request, 'update_masini.html', context)
 
+def update_Comenzi(request, pk):
+    comanda = Comenzi.objects.get(id=pk)
+    form = ComenziForm(instance = comanda)
+
+    if request.method == 'POST':
+        form = ComenziForm(request.POST, instance = comanda)
+        if form.is_valid():
+            form.save()
+            return redirect('/search/comenzi')
+
+    context = {
+        'comanda': comanda,
+        'form': form,
+    }
+    return render(request, 'update_comenzi.html', context)
+
 ################### DELETE #####################
 def delete_LocuriMunca(request, pk):
     locMunca = LocuriMunca.objects.get(id=pk)
@@ -384,3 +427,16 @@ def delete_Masini(request, pk):
         'masina': masina,
     }
     return render(request, 'delete_masini.html', context)
+
+def delete_Comenzi(request, pk):
+    comanda = Comenzi.objects.get(id=pk)
+
+    if request.method == 'POST':
+        comanda.delete()
+        return redirect('/search/comenzi')
+
+    context = {
+        'comanda': comanda,
+    }
+    return render(request, 'delete_comenzi.html', context)
+

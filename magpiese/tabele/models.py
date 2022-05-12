@@ -205,7 +205,7 @@ class Comenzi(models.Model):
         verbose_name_plural = 'Comenzi'
 
     def __str__(self):
-        return 'comanda clientului %s din data %s cu id-ul %s' % (self.client_cnp, self.data_comanda, self.pk)
+        return 'comanda din data %s cu id-ul %s' % (self.data_comanda, self.pk)
 
 
 
