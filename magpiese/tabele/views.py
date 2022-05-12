@@ -131,6 +131,19 @@ def create_ComandaPiesa(request):
         form = ComandaPiesaForm()
     return render(request, 'create_comandapiesa.html', {'form':form})
 
+def create_Adresa(request):
+    if request.method == "POST":
+        form = AdreseForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('../create/')
+            except:
+                pass
+    else:
+        form = AdreseForm()
+    return render(request, 'create_adresa.html', {'form':form})
+
 
 ################### SEARCH #####################
 def search(request):
@@ -235,6 +248,14 @@ def read_ComandaPiesa(request):
 
     }
     return render(request, 'search_comandapiesa.html', context)
+
+def read_Adrese(request):
+    adrese = Adrese.objects.all()
+
+    context = {
+        'adrese': adrese,
+    }
+    return render(request, 'search_adrese.html', context)
 
 ################### UPDATE #####################
 def update_LocuriMunca(request, pk):
@@ -381,6 +402,22 @@ def update_ComandaPiesa(request, pk):
     }
     return render(request, 'update_comandapiesa.html', context)
 
+def update_Adrese(request, pk):
+    adresa = Adrese.objects.get(id=pk)
+    form = AdreseForm(instance = adresa)
+
+    if request.method == 'POST':
+        form = AdreseForm(request.POST, instance = adresa)
+        if form.is_valid():
+            form.save()
+            return redirect('/search/adrese')
+
+    context = {
+        'adresa': adresa,
+        'form': form,
+    }
+    return render(request, 'update_adrese.html', context)
+
 ################### DELETE #####################
 def delete_LocuriMunca(request, pk):
     locMunca = LocuriMunca.objects.get(id=pk)
@@ -497,3 +534,15 @@ def delete_ComandaPiesa(request, pk):
         'piese': piese,
     }
     return render(request, 'delete_comandapiesa.html', context)
+
+def delete_Adrese(request, pk):
+    adresa = Adrese.objects.get(id=pk)
+
+    if request.method == 'POST':
+        adresa.delete()
+        return redirect('/search/adrese')
+
+    context = {
+        'adresa': adresa,
+    }
+    return render(request, 'delete_adrese.html', context)

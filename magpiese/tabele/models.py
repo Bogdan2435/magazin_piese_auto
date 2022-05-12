@@ -155,11 +155,11 @@ class Adrese(models.Model):
     judet = models.CharField(max_length=255)
     localitate = models.CharField(max_length=255)
     strada = models.CharField(max_length=255)
-    nr_strada = models.IntegerField()
-    nr_bloc = models.IntegerField()
-    scara = models.CharField(max_length=255)
-    etaj = models.IntegerField()
-    apartament = models.IntegerField()
+    nr_strada = models.IntegerField(default ='0')
+    nr_bloc = models.IntegerField(default ='0')
+    scara = models.CharField(max_length=255, default =' ')
+    etaj = models.IntegerField(default ='0')
+    apartament = models.IntegerField(default ='0')
 
     class Meta:
         verbose_name = 'Adresa'

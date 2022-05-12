@@ -55,3 +55,9 @@ class ComandaPiesaForm(forms.ModelForm):
     class Meta:
         model = ComandaPiesa
         fields = "__all__"
+
+
+class AdreseForm(forms.ModelForm):
+    class Meta:
+        model = Adrese
+        fields = "__all__"
