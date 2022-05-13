@@ -24,7 +24,7 @@ class Angajati(models.Model):
     email = models.CharField(max_length=255)
     data_angajare = models.DateField()
     data_nasterii = models.DateField()
-    loc_munca = models.ForeignKey(LocuriMunca, null=True, on_delete = models.RESTRICT)
+    loc_munca = models.ForeignKey(LocuriMunca, null=True, on_delete = models.PROTECT)
 
     class Meta:
         verbose_name = 'Angajat'
@@ -116,8 +116,8 @@ class Piese(models.Model):
 
 
 class Piesa_Model(models.Model):
-    piesa = models.ForeignKey(Piese, on_delete = models.PROTECT)
-    model = models.ForeignKey(Modele_Masini, on_delete = models.PROTECT)
+    piesa = models.ForeignKey(Piese, on_delete = models.CASCADE)
+    model = models.ForeignKey(Modele_Masini, on_delete = models.CASCADE)
 
     ORIGINALA = (
         ('originala', 'originala'),
@@ -171,9 +171,9 @@ class Adrese(models.Model):
 
 class Comenzi(models.Model):
     data_comanda = models.DateField()
-    masina_nr = models.ForeignKey(Masini, on_delete = models.RESTRICT)
-    client_nume = models.ForeignKey(Clienti, on_delete = models.RESTRICT)
-    angajat_nume = models.ForeignKey(Angajati, on_delete = models.RESTRICT)
+    masina_nr = models.ForeignKey(Masini, on_delete = models.PROTECT)
+    client_nume = models.ForeignKey(Clienti, on_delete = models.PROTECT)
+    angajat_nume = models.ForeignKey(Angajati, on_delete = models.PROTECT)
 
     TIP_LIVRARE = (
         ('ridicare personala', 'ridicare personala'),
@@ -209,8 +209,8 @@ class Comenzi(models.Model):
 
 
 class ComandaPiesa(models.Model):
-    comanda = models.ForeignKey(Comenzi, on_delete = models.PROTECT)
-    piesa = models.ForeignKey(Piese, on_delete = models.PROTECT)
+    comanda = models.ForeignKey(Comenzi, on_delete = models.CASCADE)
+    piesa = models.ForeignKey(Piese, on_delete = models.CASCADE)
     nr_piese = models.IntegerField(default = '1')
 
     class Meta:
@@ -220,12 +220,12 @@ class ComandaPiesa(models.Model):
 
 class Livrari(models.Model):
     awb = models.CharField(
-        max_length = 255,
+        max_length = 20,
         primary_key = True,
     )
-    angajat = models.ForeignKey(Angajati, on_delete = models.RESTRICT)
-    comanda = models.ForeignKey(Comenzi, on_delete = models.RESTRICT)
-    adresa = models.ForeignKey(Adrese, on_delete = models.RESTRICT)
+    angajat = models.ForeignKey(Angajati, on_delete = models.PROTECT)
+    comanda = models.ForeignKey(Comenzi, on_delete = models.CASCADE)
+    adresa = models.ForeignKey(Adrese, on_delete = models.PROTECT)
 
     STATUS_LIVRARE = (
         ('primita', 'primita'),
