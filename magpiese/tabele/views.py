@@ -614,3 +614,13 @@ def pct_c(request):
         'clienti': clienti,
     }
     return render(request, 'cerinta3_pct_c.html', context)
+
+def pct_d(request):
+    angajati = Angajati.objects.all()
+    tab_nou = Angajati.objects.raw('SELECT id, loc_munca_id, MIN(salariu) AS minim FROM tabele_angajati GROUP BY loc_munca_id HAVING MIN(salariu) < 2000')
+
+    context = {
+        'angajati': angajati,
+        'tab_nou': tab_nou,
+    }
+    return render(request, 'cerinta3_pct_d.html', context)

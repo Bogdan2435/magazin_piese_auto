@@ -33,12 +33,13 @@
 </head>
 
 <body>
-    <h2 style="text-align:center"> Rezolvarea Cerintei c) de la punctul III</h2>
+    <h2 style="text-align:center"> Rezolvarea Cerintei d) de la punctul III</h2>
     <center>
         <div class="card" style="width: 60rem;">
             <div class="card-body">
                 <h5 class="card-title">Cerinta</h5>
-                <p class="card-text">Afisarea rezultatului unei cereri care extrage informatii din cel putin 3 tabele si le filtreaza cu ajutorul a cel putin 2 contitii.</p>
+                <p class="card-text">Afisarea rezultatului unei cereri care foloseste functii grup si o clauza having.</p>
+                <p>Pentru fiecare loc de munca voi afisa codul si salariul celui mai prost platit angajat. Vom exclude locurile de munca unde salariul minum este de peste 2000.</p>
             </div>
         </div>
         <h1></h1>
@@ -46,13 +47,16 @@
             <div class="card-body">
                 <h5 class="card-title">Comanda SQL</h5>
                 <p class="card-text">
-                    SELECT nr_inmatriculare, tabele_comenzi.id AS 'id comanda',  prenume 
+                    SELECT a.loc_munca_id, MIN(a.salariu)
                 </p>
                 <p class="card-text">
-                    FROM magpiese.tabele_masini, magpiese.tabele_comenzi, magpiese.tabele_clienti
+                    FROM magpiese.tabele_angajati a
                 </p>
                 <p class="card-text">
-                    WHERE prenume = 'Bogdan' && tabele_comenzi.id BETWEEN 2 AND 7 && tabele_comenzi.masina_nr_id = tabele_masini.vin && tabele_comenzi.client_nume_id = tabele_clienti.cnp;
+                    GROUP BY a.loc_munca_id
+                </p>
+                <p class="card-text">
+                    HAVING MIN(a.salariu) < 2000; 
                 </p>
             </div>
         </div>
@@ -63,35 +67,19 @@
             <table id="example" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Nr Inmatriculare al masini pentru care a fost plasata comanda</th>
-                        <th>Id Comanda</th>
-                        <th>Prenumele Clientului care a  plasat comanda</th>
+                        <th>ID loc de munca</th>
+                        <th>Salariu Minim</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for comanda in comenzi %}
+                    {% for tabn in tab_nou %}
                     <tr>
-                        {% if comanda.id >= 2 %}
-                        {% if 7 >= comanda.id %}
-                        {% for client in clienti %}
-                        {% for masina in masini %}
-                        {% if client.prenume == 'Bogdan' %}
-                        {% if comanda.masina_nr_id == masina.vin %}
-                        {% if comanda.client_nume_id == client.cnp %}
-                        <td>{{masina.nr_inmatriculare}}</td>
-                        <td>{{comanda.id}}</td>
-                        <td>{{client.prenume}}</td>
-                        {% endif %}
-                        {% endif %}
-                        {% endif %}
-                        {% endfor %}
-                        {% endfor %}
-                        {% endif %}
-                        {% endif %}
+                        <td>{{tabn.loc_munca_id}}</td>
+                        <td>{{tabn.minim}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
-            </table>
+            </table> 
         </div>
     </center>
     <center><a href="{% url 'home' %}">Return home</a></center>

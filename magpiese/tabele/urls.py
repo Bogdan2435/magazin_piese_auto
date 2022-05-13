@@ -57,4 +57,5 @@ urlpatterns = [
     path('delete/livrari/<int:pk>', views.delete_Livrari, name='delete_livrari'),
 
     path('pct3/c', views.pct_c, name='pct_c'),
+    path('pct3/d', views.pct_d, name='pct_d'),
 ]
