@@ -59,13 +59,13 @@
                     <td>{{piesa.pret_ron}} RON</td>
                     <td>
                         {% for legatura in legaturi %}
-                        {% if legatura.piesa_id == piesa.id %}
                         {% for model in modele %}
-                        {% if piesa.id == legatura.piesa_id %}
+                        {% if legatura.piesa_id == piesa.id %}
+                        {% if model.id == legatura.model_id %}
                         {{model.marca}} {{model.model}} {{model.an_incepere_productie}}, 
                         {% endif %}
-                        {% endfor %}
                         {% endif %}
+                        {% endfor %}
                         {% endfor %}
                     </td>
                     <td>
