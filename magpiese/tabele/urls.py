@@ -5,6 +5,7 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('', RedirectView.as_view(url='home/', permanent=True)),
     path('home/', views.home, name='home'),
+
     path('create/', views.create, name='create'),
     path('create/locmunca', views.create_LocMunca, name='create_locmunca'),
     path('create/anagajati', views.create_Angajat, name='create_angajat'),
@@ -17,6 +18,7 @@ urlpatterns = [
     path('create/comandapiesa', views.create_ComandaPiesa, name='create_comandapiesa'),
     path('create/adrese', views.create_Adresa, name='create_adresa'),
     path('create/livrare', views.create_Livrare, name='create_livrare'),
+
     path('search/', views.search, name='search'),
     path('search/locurimunca', views.read_LocuriMunca, name='search_locurimunca'),
     path('search/angajati', views.read_Angajati, name='search_angajati'),
@@ -29,6 +31,7 @@ urlpatterns = [
     path('search/comandapiesa', views.read_ComandaPiesa, name='search_comandapiesa'),
     path('search/adrese', views.read_Adrese, name='search_adrese'),
     path('search/livrari', views.read_Livrari, name='search_livrari'),
+
     path('update/locurimunca/<int:pk>', views.update_LocuriMunca, name='update_locurimunca'),
     path('update/angajati/<int:pk>', views.update_Angajati, name='update_locurimunca'),
     path('update/clienti/<int:pk>', views.update_Clienti, name='update_clienti'),
@@ -40,6 +43,7 @@ urlpatterns = [
     path('update/comandapiesa/<int:pk>', views.update_ComandaPiesa, name='update_comandapiesa'),
     path('update/adrese/<int:pk>', views.update_Adrese, name='update_adrese'),
     path('update/livrari/<int:pk>', views.update_Livrare, name='update_livrari'),
+
     path('delete/locurimunca/<int:pk>', views.delete_LocuriMunca, name='delete_locurimunca'),
     path('delete/angajati/<int:pk>', views.delete_Angajati, name='delete_angajati'),
     path('delete/clienti/<int:pk>', views.delete_Clienti, name='delete_clienti'),
@@ -51,7 +55,6 @@ urlpatterns = [
     path('delete/comandapiesa/<int:pk>', views.delete_ComandaPiesa, name='delete_comandapiesa'),
     path('delete/adrese/<int:pk>', views.delete_Adrese, name='delete_adrese'),
     path('delete/livrari/<int:pk>', views.delete_Livrari, name='delete_livrari'),
-    # path('search/', views.search, name='search'),
-    # path('update/<int:pk>', views.update, name='update'),
-    # path('delete/<int:pk>', views.delete, name='delete'),
+
+    path('pct3/c', views.pct_c, name='pct_c'),
 ]

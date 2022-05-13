@@ -601,3 +601,16 @@ def delete_Livrari(request, pk):
         'livrare': livrare,
     }
     return render(request, 'delete_livrari.html', context)
+
+################### CERINTE PCT3 #####################
+def pct_c(request):
+    comenzi = Comenzi.objects.all()
+    masini = Masini.objects.all()
+    clienti = Clienti.objects.all()
+
+    context = {
+        'comenzi': comenzi,
+        'masini': masini,
+        'clienti': clienti,
+    }
+    return render(request, 'cerinta3_pct_c.html', context)
