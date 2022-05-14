@@ -157,7 +157,7 @@ class Adrese(models.Model):
     strada = models.CharField(max_length=255)
     nr_strada = models.IntegerField(default ='0')
     nr_bloc = models.IntegerField(default ='0')
-    scara = models.CharField(max_length=255, default =' ')
+    scara = models.CharField(max_length=255, default ='0')
     etaj = models.IntegerField(default ='0')
     apartament = models.IntegerField(default ='0')
 
