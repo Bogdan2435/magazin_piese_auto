@@ -617,7 +617,7 @@ def pct_c(request):
 
 def pct_d(request):
     angajati = Angajati.objects.all()
-    tab_nou = Angajati.objects.raw('SELECT id, loc_munca_id, MIN(salariu) AS minim FROM tabele_angajati GROUP BY loc_munca_id HAVING MIN(salariu) < 2000')
+    tab_nou = Angajati.objects.raw('SELECT id, loc_munca_id, MIN(salariu) AS minim FROM tabele_angajati GROUP BY loc_munca_id HAVING MIN(salariu) < 3000')
 
     context = {
         'angajati': angajati,

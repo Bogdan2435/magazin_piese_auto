@@ -39,7 +39,7 @@
             <div class="card-body">
                 <h5 class="card-title">Cerinta</h5>
                 <p class="card-text">Afisarea rezultatului unei cereri care foloseste functii grup si o clauza having.</p>
-                <p>Pentru fiecare loc de munca voi afisa codul si salariul celui mai prost platit angajat. Vom exclude locurile de munca unde salariul minum este de peste 2000.</p>
+                <p>Pentru fiecare loc de munca voi afisa codul si salariul celui mai prost platit angajat. Vom exclude locurile de munca unde salariul minum este de peste 3000.</p>
             </div>
         </div>
         <h1></h1>
@@ -56,7 +56,7 @@
                     GROUP BY a.loc_munca_id
                 </p>
                 <p class="card-text">
-                    HAVING MIN(a.salariu) < 2000; 
+                    HAVING MIN(a.salariu) < 3000; 
                 </p>
             </div>
         </div>
