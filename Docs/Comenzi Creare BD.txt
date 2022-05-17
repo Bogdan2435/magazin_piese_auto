@@ -1,0 +1,162 @@
+CREATE SCHEMA `mag_piese.bd` ;
+
+CREATE TABLE `mag_piese.bd`.`locuri_munca` (
+  `id_loc_munca` INT NOT NULL AUTO_INCREMENT,
+  `denumire` VARCHAR(45) NOT NULL,
+  `salariu_min` INT UNSIGNED NOT NULL,
+  `salariu_max` INT UNSIGNED NULL,
+  PRIMARY KEY (`id_loc_munca`));
+
+CREATE TABLE `mag_piese.bd`.`angajati` (
+  `id_angajat` INT NOT NULL AUTO_INCREMENT,
+  `nume_familie` VARCHAR(45) NOT NULL,
+  `prenume` VARCHAR(45) NOT NULL,
+  `salariu` INT UNSIGNED NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `data_angajare` DATE NOT NULL,
+  `data_nastere` DATE NOT NULL,
+  `loc_munca` INT NOT NULL,
+  PRIMARY KEY (`id_angajat`),
+  INDEX `loc_munca_idx` (`loc_munca` ASC) VISIBLE,
+  CONSTRAINT `loc_munca`
+    FOREIGN KEY (`loc_munca`)
+    REFERENCES `mag_piese.bd`.`locuri_munca` (`id_loc_munca`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT);
+
+CREATE TABLE `mag_piese.bd`.`adrese` (
+  `id_adresa` INT NOT NULL AUTO_INCREMENT,
+  `tara` VARCHAR(45) NOT NULL,
+  `judet` VARCHAR(45) NOT NULL,
+  `localitate` VARCHAR(45) NOT NULL,
+  `strada` VARCHAR(45) NOT NULL,
+  `nr_strada` INT UNSIGNED NOT NULL,
+  `bloc` INT UNSIGNED NULL,
+  `scara` VARCHAR(10) NULL,
+  `etaj` INT UNSIGNED NULL,
+  `apartament` INT UNSIGNED NULL,
+  PRIMARY KEY (`id_adresa`));
+
+CREATE TABLE `mag_piese.bd`.`clienti` (
+  `cnp` VARCHAR(13) NOT NULL,
+  `nume_familie` VARCHAR(45) NOT NULL,
+  `prenume` VARCHAR(45) NOT NULL,
+  `nr_telefon` VARCHAR(412) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`cnp`));
+
+CREATE TABLE `mag_piese.bd`.`masini` (
+  `vin` VARCHAR(17) NOT NULL,
+  `nr_inmatriculare` VARCHAR(10) NOT NULL,
+  `an_fabricatie` YEAR NOT NULL,
+  `kilometraj` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`vin`));
+CREATE TABLE `mag_piese.bd`.`modele_masini` (
+  `id_model` INT NOT NULL AUTO_INCREMENT,
+  `marca` VARCHAR(45) NOT NULL,
+  `model` VARCHAR(45) NOT NULL,
+  `an_incepere_fabricatie` YEAR NOT NULL,
+  `an_finalizare_fabricatie` YEAR NOT NULL,
+  `motorizare_cc` INT UNSIGNED NULL,
+  `putere_cp` INT UNSIGNED NOT NULL,
+  `combustibil` ENUM('benzina', 'diesel', 'hybrid-benzina', 'hybrid-diesel', 'electric', 'hidrogen') NOT NULL,
+  `cod_motor` VARCHAR(10) NOT NULL DEFAULT 'nu exista',
+  `tip_tractiune` ENUM('fata', 'spare', '4x4') NOT NULL,
+  PRIMARY KEY (`id_model`));
+
+CREATE TABLE `mag_piese.bd`.`piese` (
+  `id_piesa` INT NOT NULL AUTO_INCREMENT,
+  `denumire_piesa` VARCHAR(45) NOT NULL,
+  `producator` VARCHAR(45) NOT NULL,
+  `interval_recomandat_schimb` VARCHAR(45) NOT NULL DEFAULT 'nu exista',
+  `pret_ron` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_piesa`, `pret_ron`));
+
+CREATE TABLE `mag_piese.bd`.`piesa_model` (
+  `id_piesa` INT NOT NULL,
+  `id_model` INT NOT NULL,
+  `originala` ENUM('originala', 'compatibila') NOT NULL DEFAULT 'originala',
+  PRIMARY KEY (`id_piesa`, `id_model`),
+  INDEX `id_model_idx` (`id_model` ASC) VISIBLE,
+  CONSTRAINT `id_piesa`
+    FOREIGN KEY (`id_piesa`)
+    REFERENCES `mag_piese.bd`.`piese` (`id_piesa`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `id_model`
+    FOREIGN KEY (`id_model`)
+    REFERENCES `mag_piese.bd`.`modele_masini` (`id_model`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+
+CREATE TABLE `mag_piese.bd`.`comenzi` (
+  `id_comanda` INT NOT NULL AUTO_INCREMENT,
+  `data_comanda` DATE NOT NULL,
+  `masina` VARCHAR(17) NOT NULL,
+  `client` VARCHAR(13) NOT NULL,
+  `pregatita_de_angajat` INT NOT NULL,
+  `tip_livrare` ENUM('ridicare personala', 'livrare') NOT NULL DEFAULT 'ridicare personala',
+  `status_comanda` ENUM('plasata', 'pregatita pentru ridicare', 'in curs de livrare', 'ridicata', 'livrata') NOT NULL DEFAULT 'plasata',
+  PRIMARY KEY (`id_comanda`),
+  INDEX `masina_idx` (`masina` ASC) VISIBLE,
+  INDEX `client_idx` (`client` ASC) VISIBLE,
+  INDEX `pregatita_de_angajat_idx` (`pregatita_de_angajat` ASC) VISIBLE,
+  CONSTRAINT `masina`
+    FOREIGN KEY (`masina`)
+    REFERENCES `mag_piese.bd`.`masini` (`vin`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `client`
+    FOREIGN KEY (`client`)
+    REFERENCES `mag_piese.bd`.`clienti` (`cnp`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `pregatita_de_angajat`
+    FOREIGN KEY (`pregatita_de_angajat`)
+    REFERENCES `mag_piese.bd`.`angajati` (`id_angajat`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT);
+
+CREATE TABLE `mag_piese.bd`.`comanda_piesa` (
+  `id-comanda` INT NOT NULL,
+  `id-piesa` INT NOT NULL,
+  `nr_piese` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id-comanda`, `id-piesa`),
+  INDEX `id_piesa_idx` (`id-piesa` ASC) VISIBLE,
+  CONSTRAINT `id-comanda`
+    FOREIGN KEY (`id-comanda`)
+    REFERENCES `mag_piese.bd`.`comenzi` (`id_comanda`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `id-piesa`
+    FOREIGN KEY (`id-piesa`)
+    REFERENCES `mag_piese.bd`.`piese` (`id_piesa`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+
+CREATE TABLE `mag_piese.bd`.`livrari` (
+  `AWB` VARCHAR(20) NOT NULL,
+  `livrata_de_angajat` INT NOT NULL,
+  `comanda` INT NOT NULL,
+  `adresa` INT NOT NULL,
+  `status_livrare` ENUM('primita', 'in curs de livrare', 'livrata') NOT NULL DEFAULT 'primita',
+  `data_programata_livrare` DATE NOT NULL,
+  PRIMARY KEY (`AWB`),
+  INDEX `livrata_de_angajat_idx` (`livrata_de_angajat` ASC) VISIBLE,
+  INDEX `comanda_idx` (`comanda` ASC) VISIBLE,
+  INDEX `adresa_idx` (`adresa` ASC) VISIBLE,
+  CONSTRAINT `livrata_de_angajat`
+    FOREIGN KEY (`livrata_de_angajat`)
+    REFERENCES `mag_piese.bd`.`angajati` (`id_angajat`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `comanda`
+    FOREIGN KEY (`comanda`)
+    REFERENCES `mag_piese.bd`.`comenzi` (`id_comanda`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `adresa`
+    FOREIGN KEY (`adresa`)
+    REFERENCES `mag_piese.bd`.`adrese` (`id_adresa`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT);
