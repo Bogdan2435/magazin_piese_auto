@@ -1,6 +1,6 @@
 
-## Cum accesez interata web pentru interactionarea cu baza de date?
-- Creez in anaconda env python cu versiunea 3.8.13 si in mysql o schema nou cu denumirea "magpiese".</br>
+## Cum accesez interfata web pentru interactionarea cu baza de date?
+- Creez in anaconda env python cu versiunea 3.8.13 si in mysql o schema noua cu denumirea "magpiese".</br>
 - Creez un folder in care descarc tot ce este pe git </br>
 - In folderul creat initializez virtual env cu comanda:
 ```
