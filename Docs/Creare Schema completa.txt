@@ -10,7 +10,7 @@ CREATE TABLE `mag_piese.bd`.`locuri_munca` (
   `id_loc_munca` INT NOT NULL AUTO_INCREMENT,
   `denumire` VARCHAR(45) NOT NULL,
   `salariu_min` INT UNSIGNED NOT NULL,
-  `salariu_max` INT UNSIGNED NULL,
+  `salariu_max` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id_loc_munca`));
 
 -- -----------------------------------------------------
@@ -56,7 +56,7 @@ CREATE TABLE `mag_piese.bd`.`clienti` (
   `cnp` VARCHAR(13) NOT NULL,
   `nume_familie` VARCHAR(45) NOT NULL,
   `prenume` VARCHAR(45) NOT NULL,
-  `nr_telefon` VARCHAR(412) NOT NULL,
+  `nr_telefon` VARCHAR(12) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`cnp`));
 
@@ -95,7 +95,7 @@ CREATE TABLE `mag_piese.bd`.`piese` (
   `producator` VARCHAR(45) NOT NULL,
   `interval_recomandat_schimb` VARCHAR(45) NOT NULL DEFAULT 'nu exista',
   `pret_ron` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id_piesa`, `pret_ron`));
+  PRIMARY KEY (`id_piesa`));
 
 -- -----------------------------------------------------
 -- Create Table 'piesa_model'
