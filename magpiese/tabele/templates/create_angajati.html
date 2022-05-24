@@ -91,6 +91,23 @@
 
 </body>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    {% for msg in messages %}
+    {% if msg.tags == "error" %}
+    icn = "error"
+    {% else %}
+    icn = "success"
+    {% endif %}
+    swal({
+        title: "{{ msg }}",
+        text: "",
+        icon: icn,
+        button: "Inchide!",
+    });
+    {% endfor %}
+</script>
+
 <!-- <script type="text/javascript" src="{% static './js/vendors/datepicker.js' %}"></script>
 <script src="{% static './js/vendors/daterangepicker.js' %}"></script>
 <script src="{% static './js/vendors/moment.js' %}"></script>

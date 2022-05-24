@@ -94,5 +94,21 @@
 
 </body>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    {% for msg in messages %}
+    {% if msg.tags == "error" %}
+    icn = "error"
+    {% else %}
+    icn = "success"
+    {% endif %}
+    swal({
+        title: "{{ msg }}",
+        text: "",
+        icon: icn,
+        button: "Inchide!",
+    });
+    {% endfor %}
+</script>
 
 </html>

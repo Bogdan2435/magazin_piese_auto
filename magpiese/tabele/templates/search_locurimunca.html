@@ -91,5 +91,24 @@
     crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="{% static './js/table.js' %}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="{% static './js/swallert.js' %}"></script>
+<script>
+    {% for msg in messages %}
+    {% if msg.tags == "error" %}
+    icn = "error"
+    {% else %}
+    icn = "success"
+    {% endif %}
+    swal({
+        title: "{{ msg }}",
+        text: "",
+        icon: icn,
+        button: "Inchide!",
+    });
+    {% endfor %}
+</script>
+
+
 
 </html>

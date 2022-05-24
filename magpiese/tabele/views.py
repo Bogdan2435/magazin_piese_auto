@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import *
 from .models import *
+from django.contrib import messages
 
 
 ################### HOME #####################
@@ -20,7 +21,8 @@ def create_LocMunca(request):
         if form.is_valid():
             try:
                 form.save()
-                return redirect('../create/')
+                messages.success(request, "Locul de munca a fost adaugat cu succes.")
+                return redirect('/search/locurimunca')
             except:
                 pass
     else:
@@ -33,6 +35,7 @@ def create_Angajat(request):
         if form.is_valid():
             try:
                 form.save()
+                messages.success(request, "Angajatul a fost adaugat cu succes.")
                 return redirect('../create/')
             except:
                 pass
@@ -46,6 +49,7 @@ def create_Client(request):
         if form.is_valid():
             try:
                 form.save()
+                messages.success(request, "Clientul a fost adaugat cu succes.")
                 return redirect('../create/')
             except:
                 pass
@@ -59,6 +63,7 @@ def create_Model(request):
         if form.is_valid():
             try:
                 form.save()
+                messages.success(request, "Modelul de masina a fost adaugat cu succes.")
                 return redirect('../create/')
             except:
                 pass
@@ -72,6 +77,7 @@ def create_Piesa(request):
         if form.is_valid():
             try:
                 form.save()
+                messages.success(request, "Piesa a fost adaugata cu succes.")
                 return redirect('../create/')
             except:
                 pass
@@ -85,6 +91,7 @@ def create_PiesaModel(request):
         if form.is_valid():
             try:
                 form.save()
+                messages.success(request, "Legatura a fost adaugata cu succes.")
                 return redirect('../create/')
             except:
                 pass
@@ -98,6 +105,7 @@ def create_Masina(request):
         if form.is_valid():
             try:
                 form.save()
+                messages.success(request, "Masina a fost adaugata cu succes.")
                 return redirect('../create/')
             except:
                 pass
@@ -111,6 +119,7 @@ def create_Comanda(request):
         if form.is_valid():
             try:
                 form.save()
+                messages.success(request, "Comanda a fost adaugata cu succes.")
                 return redirect('../create/')
             except:
                 pass
@@ -124,6 +133,7 @@ def create_ComandaPiesa(request):
         if form.is_valid():
             try:
                 form.save()
+                messages.success(request, "Legatura a fost adaugata cu succes.")
                 return redirect('../create/')
             except:
                 pass
@@ -137,6 +147,7 @@ def create_Adresa(request):
         if form.is_valid():
             try:
                 form.save()
+                messages.success(request, "Adresa a fost adaugata cu succes.")
                 return redirect('../create/')
             except:
                 pass
@@ -150,6 +161,7 @@ def create_Livrare(request):
         if form.is_valid():
             try:
                 form.save()
+                messages.success(request, "Livrarea a fost adaugata cu succes.")
                 return redirect('../create/')
             except:
                 pass
@@ -293,6 +305,7 @@ def update_LocuriMunca(request, pk):
         form = LocMuncaForm(request.POST, instance=locMunca)
         if form.is_valid():
             form.save()
+            messages.success(request, "Locul de munca a fost modificat cu succes.")
             return redirect('/search/locurimunca')
 
     context = {
@@ -309,6 +322,7 @@ def update_Angajati(request, pk):
         form = AngajatiForm(request.POST, instance=angajat)
         if form.is_valid():
             form.save()
+            messages.success(request, "Angajatul a fost modificat cu succes.")
             return redirect('/search/angajati')
 
     context = {
@@ -325,6 +339,7 @@ def update_Clienti(request, pk):
         form = ClientiForm(request.POST, instance=client)
         if form.is_valid():
             form.save()
+            messages.success(request, "Clientul a fost modificat cu succes.")
             return redirect('/search/clienti')
 
     context = {
@@ -341,6 +356,7 @@ def update_Modele(request, pk):
         form = ModeleForm(request.POST, instance=modelMasina)
         if form.is_valid():
             form.save()
+            messages.success(request, "Modelul a fost modificat cu succes.")
             return redirect('/search/modele')
 
     context = {
@@ -357,6 +373,7 @@ def update_Piese(request, pk):
         form = PieseForm(request.POST, instance=piesa)
         if form.is_valid():
             form.save()
+            messages.success(request, "Piesa a fost modificata cu succes.")
             return redirect('/search/piese')
 
     context = {
@@ -373,6 +390,7 @@ def update_PiesaModel(request, pk):
         form = PiesaModelForm(request.POST, instance=piesamodel)
         if form.is_valid():
             form.save()
+            messages.success(request, "Legatura a fost modificata cu succes.")
             return redirect('/search/piesamodel')
 
     context = {
@@ -389,6 +407,7 @@ def update_Masini(request, pk):
         form = MasiniForm(request.POST, instance=masina)
         if form.is_valid():
             form.save()
+            messages.success(request, "Masina a fost modificata cu succes.")
             return redirect('/search/masini')
 
     context = {
@@ -405,6 +424,7 @@ def update_Comenzi(request, pk):
         form = ComenziForm(request.POST, instance = comanda)
         if form.is_valid():
             form.save()
+            messages.success(request, "Comanda a fost modificat cu succes.")
             return redirect('/search/comenzi')
 
     context = {
@@ -421,6 +441,7 @@ def update_ComandaPiesa(request, pk):
         form = ComandaPiesaForm(request.POST, instance = legatura)
         if form.is_valid():
             form.save()
+            messages.success(request, "Legatura a fost modificata cu succes.")
             return redirect('/search/comandapiesa')
 
     context = {
@@ -437,6 +458,7 @@ def update_Adrese(request, pk):
         form = AdreseForm(request.POST, instance = adresa)
         if form.is_valid():
             form.save()
+            messages.success(request, "Adresa a fost modificata cu succes.")
             return redirect('/search/adrese')
 
     context = {
@@ -453,6 +475,7 @@ def update_Livrare(request, pk):
         form = LivrariForm(request.POST, instance=livrare)
         if form.is_valid():
             form.save()
+            messages.success(request, "Livrarea a fost modificata cu succes.")
             return redirect('/search/livrari')
 
     context = {
@@ -467,6 +490,7 @@ def delete_LocuriMunca(request, pk):
 
     if request.method == 'POST':
         locMunca.delete()
+        messages.success(request, "Locul de munca a fost sters cu succes.")
         return redirect('/search/locurimunca')
 
     context = {
@@ -479,6 +503,7 @@ def delete_Angajati(request, pk):
 
     if request.method == 'POST':
         angajat.delete()
+        messages.success(request, "Angajatul a fost sters cu succes.")
         return redirect('/search/angajati')
 
     context = {
@@ -491,6 +516,7 @@ def delete_Clienti(request, pk):
 
     if request.method == 'POST':
         client.delete()
+        messages.success(request, "Clientul a fost sters cu succes.")
         return redirect('/search/clienti')
 
     context = {
@@ -503,6 +529,7 @@ def delete_Modele(request, pk):
 
     if request.method == 'POST':
         modelMasina.delete()
+        messages.success(request, "Modelul a fost sters cu succes.")
         return redirect('/search/modele')
 
     context = {
@@ -515,6 +542,7 @@ def delete_Piese(request, pk):
 
     if request.method == 'POST':
         piesa.delete()
+        messages.success(request, "Piesa a fost sters cu succes.")
         return redirect('/search/piese')
 
     context = {
@@ -529,6 +557,7 @@ def delete_PiesaModel(request, pk):
 
     if request.method == 'POST':
         piesamodel.delete()
+        messages.success(request, "Legatura a fost stearsa cu succes.")
         return redirect('/search/piesamodel')
 
     context = {
@@ -543,6 +572,7 @@ def delete_Masini(request, pk):
 
     if request.method == 'POST':
         masina.delete()
+        messages.success(request, "Masina a fost stearsa cu succes.")
         return redirect('/search/masini')
 
     context = {
@@ -555,6 +585,7 @@ def delete_Comenzi(request, pk):
 
     if request.method == 'POST':
         comanda.delete()
+        messages.success(request, "Comanda a fost stearsa cu succes.")
         return redirect('/search/comenzi')
 
     context = {
@@ -569,6 +600,7 @@ def delete_ComandaPiesa(request, pk):
 
     if request.method == 'POST':
         legatura.delete()
+        messages.success(request, "Legatura a fost stearsa cu succes.")
         return redirect('/search/comandapiesa')
 
     context = {
@@ -583,6 +615,7 @@ def delete_Adrese(request, pk):
 
     if request.method == 'POST':
         adresa.delete()
+        messages.success(request, "Adresa a fost stearsa cu succes.")
         return redirect('/search/adrese')
 
     context = {
@@ -595,6 +628,7 @@ def delete_Livrari(request, pk):
 
     if request.method == 'POST':
         livrare.delete()
+        messages.success(request, "Livrarea a fost stersa cu succes.")
         return redirect('/search/livrari')
 
     context = {

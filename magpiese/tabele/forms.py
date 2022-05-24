@@ -78,6 +78,11 @@ class ModeleForm(forms.ModelForm):
 
 
 class PieseForm(forms.ModelForm):
+    denumire = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    producator = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    interval_recomandat_schimb = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    pret_ron = forms.IntegerField(widget = forms.NumberInput(attrs = {'class': 'form-control form-control-lg'}))
+
     class Meta:
         model = Piese
         fields = "__all__"
