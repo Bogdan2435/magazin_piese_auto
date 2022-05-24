@@ -20,9 +20,9 @@ class AngajatiForm(forms.ModelForm):
     prenume = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
     salariu = forms.IntegerField(widget = forms.NumberInput(attrs = {'class': 'form-control form-control-lg'}))
     email = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
-    data_angajare = forms.DateField(widget = forms.DateInput(attrs = {'class': 'form-control form-control-lg', 'data-toggle': 'datepicker-icon'}))
-    data_nasterii = forms.DateField(widget = forms.DateInput(attrs = {'class': 'form-control form-control-lg', 'data-toggle': 'datepicker-icon'}))
-    # loc_munca = forms.ChoiceField(queryset=LocuriMunca.objects.all(), widget = forms.Select(attrs = {'class': 'form-control form-control-lg'}))
+    data_angajare = forms.DateField(widget = forms.DateInput(attrs = {'class': 'form-control form-control-lg'}))
+    data_nasterii = forms.DateField(widget = forms.DateInput(attrs = {'class': 'form-control form-control-lg'}))
+    loc_munca = forms.ModelChoiceField(queryset = LocuriMunca.objects.all(), widget = forms.Select(attrs = {'class': 'form-control form-control-lg'}))
 
     class Meta:
         model = Angajati
@@ -46,8 +46,32 @@ class ClientiForm(forms.ModelForm):
         model = Clienti
         fields = "__all__"
 
+MOTORIZARI = (
+        ('benzina', 'benzina'),
+        ('diesel', 'diesel'),
+        ('hybrid-benzina', 'hybrid-benzina'),
+        ('hybrid-diesel', 'hybrid-diesel'),
+        ('electric', 'electric'),
+        ('hidrogen', 'hidrogen'),
+    )
+
+SISTEM_TRACTIUNE = (
+    ('fata', 'fata'),
+    ('spate', 'spate'),
+    ('4x4', '4x4')
+)
 
 class ModeleForm(forms.ModelForm):
+    marca = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    model = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    an_incepere_productie = forms.IntegerField(widget = forms.NumberInput(attrs = {'class': 'form-control form-control-lg'}))
+    an_finalizare_productie = forms.IntegerField(widget = forms.NumberInput(attrs = {'class': 'form-control form-control-lg'}))
+    motorizare_cc = forms.IntegerField(widget = forms.NumberInput(attrs = {'class': 'form-control form-control-lg'}))
+    putere_cp = forms.IntegerField(widget = forms.NumberInput(attrs = {'class': 'form-control form-control-lg'}))
+    combustibil = forms.ChoiceField(choices = MOTORIZARI, widget = forms.Select(attrs = {'class': 'form-control form-control-lg'})) 
+    cod_motor = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'})) 
+    tip_tractiune = forms.ChoiceField(choices = SISTEM_TRACTIUNE,widget = forms.Select(attrs = {'class': 'form-control form-control-lg'})) 
+
     class Meta:
         model = Modele_Masini
         fields = "__all__"

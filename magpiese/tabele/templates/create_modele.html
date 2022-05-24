@@ -6,43 +6,116 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adauga un Model de masina nou</title>
+    <title>Add Model de Masina</title>
 
     <link type='text/css' href="{% static './css/main.87c0748b313a1dda75f5.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link type='text/css' href="{% static './css/main.css' %}" rel="stylesheet">
 </head>
 
+
 <body>
-    <div class="app-container app-theme-white body-tabs-shadow">
-        <div class="app-container">
-            <!-- <div class="h-100 bg-premium-dark"> -->
-            <div class="d-flex h-100 justify-content-center align-items-center">
-                <div class="mx-auto app-login-box col-md-8">
-                    <div class="app-logo-inverse mx-auto mb-3"></div>
-                    <div class="modal-dialog w-100">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <h5 class="modal-title">
-                                    <h4 class="mt-2">
-                                        <div class="text-center">Adauga un Model de Masina nou</div>
-                                    </h4>
-                                </h5>
-                                <div class="divider row"></div>
-                                <form method="POST" class="" >
-                                    {% csrf_token %}
-                                    {{ form.as_p }}
-                                    <div class="divider row"></div>
-                                    <center><input type="submit" class="btn btn-success btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg "></center>
-                                    <a href="{% url 'home' %}" class="mb-2 mr-2 btn-transition btn btn-outline-danger">Home</a>
-                                </form>
+
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <!-- <div class="col-12 col-md-8 col-lg-6 col-xl-5"> -->
+                <div class="card bg-dark text-white" style="border-radius: 1rem; width: 60rem;">
+                    <div class="card-body p-5 text-center">
+
+                        <div class="mb-md-5 mt-md-4 pb-5">
+
+                            <h2 class="fw-bold mb-2 text-uppercase">Adauga un model de masina.</h2>
+                            <p class="text-white-50 mb-5">Adauga un model de masina nou!</p>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="container mb-4">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-outline form-white mb-4">
+                                                {{ form.marca }}
+                                                <label class="form-label" for="typeEmailX">Marca</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-outline form-white mb-4">
+                                                {{ form.model }}
+                                                <label class="form-label" for="typeEmailX">Model</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container mb-4">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div class="form-outline form-white mb-4">
+                                                {{ form.an_incepere_productie }}
+                                                <label class="form-label" for="typeEmailX">An incepere productie</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-outline form-white mb-4">
+                                                {{ form.an_finalizare_productie }}
+                                                <label class="form-label" for="typeEmailX">An finalizare productie</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container mb-4">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div class="form-outline form-white mb-4">
+                                                {{ form.motorizare_cc }}
+                                                <label class="form-label" for="typeEmailX">Motorizare</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-outline form-white mb-4">
+                                                {{ form.combustibil }}
+                                                <label class="form-label" for="typeEmailX">Combustibil</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container mb-4">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div class="form-outline form-white mb-4">
+                                                {{ form.cod_motor }}
+                                                <label class="form-label" for="typeEmailX">Cod Motor</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-outline form-white mb-4">
+                                                {{ form.putere_cp }}
+                                                <label class="form-label" for="typeEmailX">Putere</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-outline form-white mb-4">
+                                        {{ form.tip_tractiune }}
+                                        <label class="form-label" for="typeEmailX">Tipul tractiunii</label>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-light btn-lg px-5" type="submit">Adauga</button>
+                            </form>
+                            
                         </div>
+                        <div>
+                            <p class="mb-0">Daca nu vrei sa adaugi informatii noi, atunci apasa <a
+                                    href="{% url 'home' %}" class="text-white-50 fw-bold">aici</a>
+                            </p>
+                        </div>
+
                     </div>
                 </div>
+                <!-- </div> -->
             </div>
-            <!-- </div> -->
         </div>
-    </div>
+    </section>
+
 </body>
 
-<script type="text/javascript" src="{% static './js/main.87c0748b313a1dda75f5.js' %}"></script>
 
 </html>

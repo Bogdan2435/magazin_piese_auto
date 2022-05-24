@@ -26,40 +26,49 @@
                                 <p class="text-white-50 mb-5">Adauga un Angajat nou!</p>
                                 <form method="POST">
                                     {% csrf_token %}
-                                    
-                                    <div class="form-outline form-white mb-4">
-                                        {{ form.nume_familie }}
-                                        <label class="form-label" for="typeEmailX">Numele de Familie</label>
-                                    </div>
-                                    <div class="form-outline form-white mb-4">
-                                        {{ form.prenume }}
-                                        <label class="form-label" for="typeEmailX">Prenume</label>
+                                    <div class="container mb-4">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-outline form-white mb-4">
+                                                    {{ form.nume_familie }}
+                                                    <label class="form-label" for="typeEmailX">Numele de Familie</label>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-outline form-white mb-4">
+                                                    {{ form.prenume }}
+                                                    <label class="form-label" for="typeEmailX">Prenume</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-outline form-white mb-4">
                                         {{ form.salariu }}
                                         <label class="form-label" for="typePasswordX">Salariu</label>
                                     </div>
+
                                     <div class="form-outline form-white mb-4">
                                         {{ form.email }}
                                         <label class="form-label" for="typePasswordX">Email</label>
                                     </div>
-                                    <!-- <div class="input-group">
-                                        <div class="input-group-prepend datepicker-trigger">
-                                            <div class="input-group-text">
-                                                 <i class="fa fa-calendar-alt"></i> 
+                                    <div class="container mb-4">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-outline form-white mb-4">
+                                                    {{ form.data_angajare }}
+                                                    <label class="form-label" for="typePasswordX">Data Angajarii</label>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-outline form-white mb-4">
+                                                    {{ form.data_nasterii }}
+                                                    <label class="form-label" for="typePasswordX">Data Nasterii</label>
+                                                </div>
                                             </div>
                                         </div>
-                                        {{ form.data_angajare }}
-                                        <label class="input-group label" for="typePasswordX">Data Angajarii</label>
-                                    </div> -->
-                                    <div class="form-outline form-white mb-4">
-                                        {{ form.data_angajare }}
-                                        <label class="form-label" for="typePasswordX">Data Angajarii</label>
                                     </div>
-                                    <div class="form-outline form-white mb-4">
-                                        {{ form.data_nasterii }}
-                                        <label class="form-label" for="typePasswordX">Data Nasterii</label>
-                                    </div>
+                                    
+                                    
                                     <div class="form-outline form-white mb-4">
                                         {{ form.loc_munca }}
                                         <label class="form-label" for="typePasswordX">Locul de munca</label>
