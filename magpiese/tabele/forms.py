@@ -1,12 +1,17 @@
 from django import forms
-from django.forms import ModelForm
 from .models import *
 
 
 class LocMuncaForm(forms.ModelForm):
+
+    denumire = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    salariu_min = forms.IntegerField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    salariu_max = forms.IntegerField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    
     class Meta:
         model = LocuriMunca
         fields = "__all__"
+    
 
 
 class AngajatiForm(forms.ModelForm):

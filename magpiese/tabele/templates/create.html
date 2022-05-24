@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,23 +7,92 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link type='text/css' href="{% static './css/main.css' %}" rel="stylesheet">
 </head>
+<style>
+
+</style>
 
 <body>
-    <h2 style="text-align:center"> Create</h2>
-    <center><a href="{% url 'home' %}">Return home</a></center>
-    <h1></h1>
-    <center><a href="{% url 'create_locmunca' %}">Adauga un nou loc de munca.</a></center>
-    <center><a href="{% url 'create_angajat' %}">Adauga un nou angajat.</a></center>
-    <center><a href="{% url 'create_client' %}">Adauga un nou client.</a></center>
-    <center><a href="{% url 'create_model' %}">Adauga un nou model de masina.</a></center>
-    <center><a href="{% url 'create_piesa' %}">Adauga o noua piesa.</a></center>
-    <center><a href="{% url 'create_piesamodel' %}">Adauga o noua legatura piesa model.</a></center>
-    <center><a href="{% url 'create_masina' %}">Adauga o noua masina.</a></center>
-    <center><a href="{% url 'create_comanda' %}">Adauga o noua comanda.</a></center>
-    <center><a href="{% url 'create_comandapiesa' %}">Adauga o noua Legatura intre Piese si Comenzi.</a></center>
-    <center><a href="{% url 'create_adresa' %}">Adauga o noua adresa.</a></center>
-    <center><a href="{% url 'create_livrare' %}">Adauga o noua livrare.</a></center>
+
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <!-- <div class="col-12 col-md-8 col-lg-6 col-xl-5"> -->
+                    <div class="card bg-dark text-white" style="border-radius: 1rem; width: 60rem;">
+                        <div class="card-body p-5 text-center">
+
+                            <div class="mb-md-5 mt-md-4 pb-5">
+
+                                <h2 class="fw-bold mb-2 text-uppercase">Addauga informatii noi.</h2>
+                                <p class="text-white-50 mb-5">Alege tabelul in care vrei sa adaugi informatii!</p>
+                                <div class = "container mb-4">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'create_locmunca' %}"> Locuri de munca</a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'create_angajat' %}">Angajati</a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'create_client' %}">Clienti</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "container mb-4">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'create_model' %}">Modele masini</a>
+                                        </div>
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'create_piesa' %}">Piese</a>
+                                        </div>
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'create_piesamodel' %}">Legaturi piesa-model</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "container mb-4">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'create_masina' %}">Masini</a>
+                                        </div>
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'create_comanda' %}">Comenzi</a>
+                                        </div>
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'create_comandapiesa' %}">Legaturi Piesa-Comanda</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "container mb-4">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'create_adresa' %}">Adrese</a>
+                                        </div>
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'create_livrare' %}">Livrari</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="mb-0">Daca nu vrei sa adaugi informatii noi, atunci apasa <a
+                                        href="{% url 'home' %}" class="text-white-50 fw-bold">aici</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                <!-- </div> -->
+            </div>
+        </div>
+    </section>
+
 </body>
+
 
 </html>
