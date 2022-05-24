@@ -32,17 +32,16 @@ class AngajatiForm(forms.ModelForm):
         'loc_munca': forms.Select(attrs = {'class': 'form-control form-control-lg'})
     }
 
-    # widgets = {
-    #     'nume_familie': forms.TextInput(attrs = {'class': 'form-control form-control-lg'}),
-    #     'prenume': forms.TextInput(attrs = {'class': 'form-control form-control-lg'}),
-    #     'salariu': forms.NumberInput(attrs = {'class': 'form-control form-control-lg'}),
-    #     'email': forms.TextInput(attrs = {'class': 'form-control form-control-lg'}),
-    #     'data_angajare': forms.DateInput(attrs = {'class': 'form-control form-control-lg'}),
-    #     'data_nasterii': forms.DateInput(attrs = {'class': 'form-control form-control-lg'}),
-    # }
 
 
 class ClientiForm(forms.ModelForm):
+
+    cnp = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    nume_familie = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    prenume = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    nr_telefon = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    email = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+
     class Meta:
         model = Clienti
         fields = "__all__"
