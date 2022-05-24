@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,23 +7,92 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link type='text/css' href="{% static './css/main.css' %}" rel="stylesheet">
 </head>
+<style>
+
+</style>
 
 <body>
-    <h2 style="text-align:center"> Vizualizare tabele</h2>
-    <center><a href="{% url 'home' %}">Return home</a></center>
-    <h1></h1>
-    <center><a href="{% url 'search_locurimunca' %}">Vizualizeaza tabelul cu locurile de munca.</a></center>
-    <center><a href="{% url 'search_angajati' %}">Vizualizeaza angajatii.</a></center>
-    <center><a href="{% url 'search_clienti' %}">Vizualizeaza tabelul clientilor.</a></center>
-    <center><a href="{% url 'search_modele' %}">Vizualizeaza tabelul modele de masini.</a></center>
-    <center><a href="{% url 'search_piese' %}">Vizualizeaza piesele.</a></center>
-    <center><a href="{% url 'search_piesamodel' %}">Vizualizeaza Legaturile dintre Piese si Modele.</a></center>
-    <center><a href="{% url 'search_masini' %}">Vizualizeaza Masinile.</a></center>
-    <center><a href="{% url 'search_comenzi' %}">Vizualizeaza Comenzile.</a></center>
-    <center><a href="{% url 'search_comandapiesa' %}">Vizualizeaza Legaturile dintre Comenzi si Piese.</a></center>
-    <center><a href="{% url 'search_adrese' %}">Vizualizeaza Adrese.</a></center>
-    <center><a href="{% url 'search_livrari' %}">Vizualizeaza Livrarile.</a></center>
+
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <!-- <div class="col-12 col-md-8 col-lg-6 col-xl-5"> -->
+                    <div class="card bg-dark text-white" style="border-radius: 1rem; width: 60rem;">
+                        <div class="card-body p-5 text-center">
+
+                            <div class="mb-md-5 mt-md-4 pb-5">
+
+                                <h2 class="fw-bold mb-2 text-uppercase">Vizualizeaza informatiile</h2>
+                                <p class="text-white-50 mb-5">Alege un tabel!</p>
+                                <div class = "container mb-4">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'search_locurimunca' %}"> Locuri de munca</a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'search_angajati' %}">Angajati</a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'search_clienti' %}">Clienti</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "container mb-4">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'search_modele' %}">Modele masini</a>
+                                        </div>
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'search_piese' %}">Piese</a>
+                                        </div>
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'search_piesamodel' %}">Legaturi piesa-model</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "container mb-4">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'search_masini' %}">Masini</a>
+                                        </div>
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'search_comenzi' %}">Comenzi</a>
+                                        </div>
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'search_comandapiesa' %}">Legaturi Piesa-Comanda</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "container mb-4">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'search_adrese' %}">Adrese</a>
+                                        </div>
+                                        <div class="col-sm">
+                                            <a class="btn btn-warning btn-lg btn-block" href="{% url 'search_livrari' %}">Livrari</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="mb-0">Daca vrei sa faci alta actiune, atunci apasa <a
+                                        href="{% url 'home' %}" class="text-white-50 fw-bold">aici</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                <!-- </div> -->
+            </div>
+        </div>
+    </section>
+
 </body>
+
 
 </html>

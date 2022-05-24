@@ -14,50 +14,38 @@
 </head>
 
 <body>
-
     <section class="vh-100 gradient-custom">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card bg-dark text-white" style="border-radius: 1rem;">
                         <div class="card-body p-5 text-center">
-
                             <div class="mb-md-5 mt-md-4 pb-5">
-
                                 <h2 class="fw-bold mb-2 text-uppercase">Add Loc de Munca</h2>
                                 <p class="text-white-50 mb-5">Adauga un Loc de munca nou!</p>
-
-                                
-
                                 <form method="POST">
                                     {% csrf_token %}
-
                                     <div class="form-outline form-white mb-4">
                                         {{ form.denumire }}
                                         <label class="form-label" for="typeEmailX">Denumire</label>
                                     </div>
-                                    
                                     <div class="form-outline form-white mb-4">
                                         {{ form.salariu_min }}
                                         <label class="form-label" for="typePasswordX">Salariu Minim</label>
                                     </div>
-
                                     <div class="form-outline form-white mb-4">
                                         {{ form.salariu_max }}
                                         <label class="form-label" for="typePasswordX">Salariu Maxim</label>
                                     </div>
-                                    
                                     <div class="divider row"></div>
-                                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Adauga</button>
                                 
                             </div>
-
                             <div>
                                 <p class="mb-0">Daca nu vrei sa adugi un loc de munca, atunci apasa <a
                                         href="{% url 'home' %}" class="text-white-50 fw-bold">aici</a>
                                 </p>
                             </div>
-
                         </div>
                     </div>
                 </div>
