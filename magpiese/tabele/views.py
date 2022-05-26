@@ -36,7 +36,7 @@ def create_Angajat(request):
             try:
                 form.save()
                 messages.success(request, "Angajatul a fost adaugat cu succes.")
-                return redirect('../create/')
+                return redirect('/search/angajati')
             except:
                 pass
     else:
@@ -50,7 +50,7 @@ def create_Client(request):
             try:
                 form.save()
                 messages.success(request, "Clientul a fost adaugat cu succes.")
-                return redirect('../create/')
+                return redirect('/search/clienti')
             except:
                 pass
     else:
@@ -64,7 +64,7 @@ def create_Model(request):
             try:
                 form.save()
                 messages.success(request, "Modelul de masina a fost adaugat cu succes.")
-                return redirect('../create/')
+                return redirect('/search/modele')
             except:
                 pass
     else:
@@ -78,7 +78,7 @@ def create_Piesa(request):
             try:
                 form.save()
                 messages.success(request, "Piesa a fost adaugata cu succes.")
-                return redirect('../create/')
+                return redirect('/search/piese')
             except:
                 pass
     else:
@@ -92,7 +92,7 @@ def create_PiesaModel(request):
             try:
                 form.save()
                 messages.success(request, "Legatura a fost adaugata cu succes.")
-                return redirect('../create/')
+                return redirect('/search/piesamodel')
             except:
                 pass
     else:
@@ -106,7 +106,7 @@ def create_Masina(request):
             try:
                 form.save()
                 messages.success(request, "Masina a fost adaugata cu succes.")
-                return redirect('../create/')
+                return redirect('/search/masini')
             except:
                 pass
     else:
@@ -120,7 +120,7 @@ def create_Comanda(request):
             try:
                 form.save()
                 messages.success(request, "Comanda a fost adaugata cu succes.")
-                return redirect('../create/')
+                return redirect('/search/comenzi')
             except:
                 pass
     else:
@@ -134,7 +134,7 @@ def create_ComandaPiesa(request):
             try:
                 form.save()
                 messages.success(request, "Legatura a fost adaugata cu succes.")
-                return redirect('../create/')
+                return redirect('/search/comandapiesa')
             except:
                 pass
     else:
@@ -148,7 +148,7 @@ def create_Adresa(request):
             try:
                 form.save()
                 messages.success(request, "Adresa a fost adaugata cu succes.")
-                return redirect('../create/')
+                return redirect('/search/adrese')
             except:
                 pass
     else:
@@ -162,7 +162,7 @@ def create_Livrare(request):
             try:
                 form.save()
                 messages.success(request, "Livrarea a fost adaugata cu succes.")
-                return redirect('../create/')
+                return redirect('/search/livrari')
             except:
                 pass
     else:
