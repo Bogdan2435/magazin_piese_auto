@@ -1,3 +1,4 @@
+from email.policy import default
 from django import forms
 from .models import *
 
@@ -88,36 +89,86 @@ class PieseForm(forms.ModelForm):
         fields = "__all__"
 
 
+ORIGINALA = (
+        ('originala', 'originala'),
+        ('compatibila', 'compatibila'),
+    )
+
+
 class PiesaModelForm(forms.ModelForm):
+    piesa = forms.ModelChoiceField(queryset = Piese.objects.all(), widget = forms.Select(attrs = {'class': 'form-control form-control-lg'}))
+    model = forms.ModelChoiceField(queryset = Modele_Masini.objects.all(), widget = forms.Select(attrs = {'class': 'form-control form-control-lg'}))
+    originala = forms.ChoiceField(choices = ORIGINALA, widget = forms.Select(attrs = {'class': 'form-control form-control-lg'}))
+
     class Meta:
         model = Piesa_Model
         fields = "__all__"
 
 
 class MasiniForm(forms.ModelForm):
+    vin = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    nr_inmatriculare = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    an_fabricatie = forms.IntegerField(widget = forms.NumberInput(attrs = {'class': 'form-control form-control-lg'}))
+    kilometraj = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+
     class Meta:
         model = Masini
         fields = "__all__"
 
 
 class ComenziForm(forms.ModelForm):
+    data_comanda = forms.DateField(widget = forms.DateInput(attrs = {'class': 'form-control form-control-lg'}))
+    masina_nr = forms.ModelChoiceField(queryset = Masini.objects.all(), widget = forms.Select(attrs = {'class': 'form-control form-control-lg'}))
+    client_nume = forms.ModelChoiceField(queryset = Clienti.objects.all(), widget = forms.Select(attrs = {'class': 'form-control form-control-lg'}))
+    angajat_nume = forms.ModelChoiceField(queryset = Angajati.objects.all(), widget = forms.Select(attrs = {'class': 'form-control form-control-lg'}))
+
+
     class Meta:
         model = Comenzi
         fields = "__all__"
 
 
 class ComandaPiesaForm(forms.ModelForm):
+    piesa = forms.ModelChoiceField(queryset = Piese.objects.all(), widget = forms.Select(attrs = {'class': 'form-control form-control-lg'}))
+    comanda = forms.ModelChoiceField(queryset = Comenzi.objects.all(), widget = forms.Select(attrs = {'class': 'form-control form-control-lg'}))
+    nr_piese = forms.IntegerField(widget = forms.NumberInput(attrs = {'class': 'form-control form-control-lg'}))
+
     class Meta:
         model = ComandaPiesa
         fields = "__all__"
 
 
 class AdreseForm(forms.ModelForm):
+    tara = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    judet = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    localitate = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    strada = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    nr_strada = forms.IntegerField(widget = forms.NumberInput(attrs = {'class': 'form-control form-control-lg'}))
+    nr_bloc = forms.IntegerField(widget = forms.NumberInput(attrs = {'class': 'form-control form-control-lg'}))
+    scara = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    etaj = forms.IntegerField(widget = forms.NumberInput(attrs = {'class': 'form-control form-control-lg'}))
+    apartament = forms.IntegerField(widget = forms.NumberInput(attrs = {'class': 'form-control form-control-lg'}))
+
     class Meta:
         model = Adrese
         fields = "__all__"
 
+
+STATUS_LIVRARE = (
+        ('primita', 'primita'),
+        ('in curs de livrare', 'in curs de livrare'),
+        ('livrata', 'livrata'),
+    )
+
+
 class LivrariForm(forms.ModelForm):
+    awb = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-lg'}))
+    angajat = forms.ModelChoiceField(queryset = Angajati.objects.all(), widget = forms.Select(attrs = {'class': 'form-control form-control-lg'}))
+    comanda = forms.ModelChoiceField(queryset = Comenzi.objects.all(), widget = forms.Select(attrs = {'class': 'form-control form-control-lg'}))
+    adresa = forms.ModelChoiceField(queryset = Adrese.objects.all(), widget = forms.Select(attrs = {'class': 'form-control form-control-lg'}))
+    status_livrare = forms.ChoiceField(choices = STATUS_LIVRARE, widget = forms.Select(attrs = {'class': 'form-control form-control-lg'}))
+    data_programata_livrare = forms.DateField(widget = forms.DateInput(attrs = {'class': 'form-control form-control-lg'}))
+
     class Meta:
         model = Livrari
         fields = "__all__"

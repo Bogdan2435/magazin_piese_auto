@@ -3,7 +3,7 @@ from tabnanny import verbose
 
 from django.db import models
 
-
+        
 class LocuriMunca(models.Model):
     denumire = models.CharField(max_length=255)
     salariu_min = models.IntegerField()
