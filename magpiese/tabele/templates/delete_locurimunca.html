@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,25 +7,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Loc Munca</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link type='text/css' href="{% static './css/main.css' %}" rel="stylesheet">
 </head>
 
 <body>
-    <form action="" method="POST">
-        {% csrf_token %}
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+                            <div class="mb-md-5 mt-md-4 pb-5">
+                                <h2 class="fw-bold mb-2 text-uppercase">Stergere Locuri de Munca</h2>
+                                <form action="" method="POST">
+                                    {% csrf_token %}
 
-        <br><br>
-        <div class="alert alert-danger" role="alert">
-            Esti sigur ca vrei sa stergi functia de "{{ locMunca.denumire }}"?
+                                    <br><br>
+                                    <div class="alert alert-danger" role="alert">
+                                        Esti sigur ca vrei sa stergi functia de "{{ locMunca.denumire }}"?
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <p>
+                                                <a class="btn btn-primary" href="{% url 'search_adrese' %}">Inapoi</a>
+                                            </p>
+                                        </div>
+                                        <div class="col">
+                                            <p>
+                                                <button class="btn btn-danger" type="submit">Sterge</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <p>
-            <a href="{% url 'search_locurimunca' %}">Return</a>
-        </p>
-
-        <p>
-            <input class="btn btn-danger" type="submit" value="Confirm">
-        </p>
-    </form>
 </body>
+
 
 </html>
